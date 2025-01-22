@@ -1,4 +1,4 @@
-# Prerequisites
+ # Prerequisites
 *.d
 
 # Compiled Object files
@@ -30,3 +30,15 @@
 *.exe
 *.out
 *.app
+
+# Build artifacts
+Luna/Build/
+Luna/JuceLibraryCode/
+
+# Ignore OS-specific files
+.DS_Store
+Luna/.DS_Store
+
+# Ignore IDE settings
+.idea/
+*.xcworkspace
