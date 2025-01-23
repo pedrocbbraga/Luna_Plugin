@@ -35,11 +35,11 @@ private:
     
     // Animation Variables =====================================================
     float centeredXPosition { 0.0f };
-    static constexpr int PARTS = 18;
+    static constexpr int PARTS = 600;
     std::vector<float> partsHeight;
     
     static constexpr float INCREMENT { 2.0f };
-    static constexpr float PART_OFFSET { 50.0f };
+    static constexpr float PART_OFFSET { 1.0f };
     bool isForward { true };
 
 

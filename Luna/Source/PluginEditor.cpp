@@ -25,7 +25,7 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     
     addAndMakeVisible(mImageComponent);
     
-    setSize (400, 300);
+    setSize (800, 600);
     
     distSlider.setSliderStyle (juce::Slider::LinearBarVertical);
     distSlider.setRange (0.0, 100.0, 1.0);
