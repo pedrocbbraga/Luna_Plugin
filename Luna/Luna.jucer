@@ -4,6 +4,10 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="Braga DSP"
               pluginFormats="buildAAX,buildAU,buildStandalone,buildVST3" pluginAAXCategory="8192">
   <MAINGROUP id="oC3VNQ" name="Luna">
+    <FILE id="wbIUDt" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+    <FILE id="ecQbdy" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+    <FILE id="LETFm4" name="MainComponent.cpp" compile="1" resource="0"
+          file="Source/MainComponent.cpp"/>
     <GROUP id="{B29A5D89-A8F4-02F6-D500-A567B6F11174}" name="Source"/>
     <FILE id="lyY4LT" name="PluginEditor.cpp" compile="1" resource="0"
           file="Source/PluginEditor.cpp"/>
