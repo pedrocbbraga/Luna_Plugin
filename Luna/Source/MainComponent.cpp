@@ -38,6 +38,9 @@ void MainComponent::update()
     
     // This code moves an X position back and forth across the screen over time
     // to draw a sine wave relative to that position.
+    
+    
+    // Makes wave go forward?
     if (isForward)
     {
         centeredXPosition += INCREMENT;
@@ -48,6 +51,8 @@ void MainComponent::update()
             centeredXPosition -= INCREMENT;
         }
     }
+    
+    // Makes wave go backward?
     else
     {
         centeredXPosition -= INCREMENT;
@@ -66,7 +71,7 @@ void MainComponent::update()
     // We might also have to change the jawn that makes it go backwards after going forward
     for (auto & partHeight : partsHeight)
     {
-        partHeight = sin (getPartDistanceOffset (partIndexOffset) / getWidth() * 10.0f) * 100.0f;
+        partHeight = sin (getPartDistanceOffset (partIndexOffset) / getWidth() * 20.0f) * 200.0f;
         partIndexOffset++;
     }
 }
@@ -79,11 +84,13 @@ void MainComponent::paint (juce::Graphics& g)
     
     
     // Draws the sine wave segments
-    g.setColour (juce::Colours::white);
+    g.setColour (juce::Colours::darkkhaki);
     
     int partIndexOffset = -(PARTS / 2);
     for (auto & partHeight : partsHeight)
     {
+        
+        // RECTANGLES/LINES THAT FILL UP THE AUDIO WAVE
         if (partHeight > 0.0f)
         {
             g.fillRect (getPartDistanceOffset (partIndexOffset), getHeight() / 2.0f - partHeight, INCREMENT, std::fabs (partHeight));
@@ -93,6 +100,7 @@ void MainComponent::paint (juce::Graphics& g)
             g.fillRect (getPartDistanceOffset (partIndexOffset), getHeight() / 2.0f, INCREMENT, std::fabs (partHeight));
         }
         
+        // LITTLE BALL AT THE TOP/BOTTOM OF EACH LINE OF THE AUDIO WAVE
         g.fillEllipse (getPartDistanceOffset (partIndexOffset) - 4.0f, getHeight() / 2.0f - partHeight, 10.0f, 10.0f);
     
         partIndexOffset++;
