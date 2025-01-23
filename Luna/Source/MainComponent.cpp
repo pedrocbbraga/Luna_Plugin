@@ -60,6 +60,10 @@ void MainComponent::update()
     }
     
     int partIndexOffset = -(PARTS / 2);
+    
+    // I'm under the impression that if we change the source of this for loop to *channelData,
+    // this will print our audio data.
+    // We might also have to change the jawn that makes it go backwards after going forward
     for (auto & partHeight : partsHeight)
     {
         partHeight = sin (getPartDistanceOffset (partIndexOffset) / getWidth() * 10.0f) * 100.0f;
