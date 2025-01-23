@@ -8,10 +8,11 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "MainComponent.h"
 
 //==============================================================================
 LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+    : AudioProcessorEditor (&p), audioProcessor (p), mainComponent()
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -35,6 +36,10 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     distSlider.addListener(this);
     
     addAndMakeVisible (&distSlider);
+    
+    
+    // THIS TURNS THE AUDIO WAVE JAWN ON/OFF
+    //addAndMakeVisible(mainComponent);
 }
 
 LunaAudioProcessorEditor::~LunaAudioProcessorEditor()

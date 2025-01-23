@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "MainComponent.h"
 
 //==============================================================================
 /**
@@ -33,6 +34,8 @@ private:
     LunaAudioProcessor& audioProcessor;
     
     juce::Slider distSlider ;
+    
+    MainComponent mainComponent;
 
     juce::ImageComponent mImageComponent;
     
