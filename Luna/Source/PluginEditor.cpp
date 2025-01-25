@@ -39,7 +39,7 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     
     
     // THIS TURNS THE AUDIO WAVE JAWN ON/OFF
-    //addAndMakeVisible(mainComponent);
+    // addAndMakeVisible(mainComponent);
 }
 
 LunaAudioProcessorEditor::~LunaAudioProcessorEditor()
