@@ -32,7 +32,7 @@
 *.app
 
 # Build artifacts
-Luna/Build/
+Luna/Builds/
 Luna/JuceLibraryCode/
 
 # Ignore OS-specific files
