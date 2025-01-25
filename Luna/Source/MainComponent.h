@@ -38,8 +38,8 @@ private:
     static constexpr int PARTS = 600;
     std::vector<float> partsHeight;
     
-    static constexpr float INCREMENT { 2.0f };
-    static constexpr float PART_OFFSET { 1.0f };
+    static constexpr float INCREMENT { 1.0f }; //Original: 2.0f
+    static constexpr float PART_OFFSET { 0.8f };
     bool isForward { true };
 
 

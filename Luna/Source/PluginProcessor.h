@@ -60,6 +60,9 @@ public:
     
 private:
     
+    juce::AudioBuffer<float> delayBuffer ;
+    int writePosition { 0 } ;
+    
     //** PARAMETERS =========================================================*/
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout() ;
     

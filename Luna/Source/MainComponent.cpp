@@ -44,7 +44,7 @@ void MainComponent::update()
     if (isForward)
     {
         centeredXPosition += INCREMENT;
-        if (centeredXPosition + INCREMENT > getWidth())
+        if (centeredXPosition + INCREMENT > getWidth() + 200)
         {
             isForward = false;
             centeredXPosition -= INCREMENT;
@@ -84,7 +84,7 @@ void MainComponent::paint (juce::Graphics& g)
     
     
     // Draws the sine wave segments
-    g.setColour (juce::Colours::darkkhaki);
+    g.setColour (juce::Colour {0xFF129183});
     
     int partIndexOffset = -(PARTS / 2);
     for (auto & partHeight : partsHeight)
@@ -101,7 +101,7 @@ void MainComponent::paint (juce::Graphics& g)
         }
         
         // LITTLE BALL AT THE TOP/BOTTOM OF EACH LINE OF THE AUDIO WAVE
-        g.fillEllipse (getPartDistanceOffset (partIndexOffset) - 4.0f, getHeight() / 2.0f - partHeight, 10.0f, 10.0f);
+        //g.fillEllipse (getPartDistanceOffset (partIndexOffset) - 4.0f, getHeight() / 2.0f - partHeight, 10.0f, 10.0f);
     
         partIndexOffset++;
     }

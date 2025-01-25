@@ -110,6 +110,9 @@ void LunaAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    
+    auto delayBufferSize = sampleRate * 2.0 ;
+    delayBuffer.setSize(getTotalNumOutputChannels(), (int)delayBufferSize) ;
 }
 
 void LunaAudioProcessor::releaseResources()
@@ -147,27 +150,18 @@ bool LunaAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) con
 void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
+    
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
 
-    // In case we have more outputs than inputs, this code clears any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    // This is here to avoid people getting screaming feedback
-    // when they first compile a plugin, but obviously you don't need to keep
-    // this code if your algorithm always overwrites all the output channels.
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
-
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
     
-    float dbGain = *treeState.getRawParameterValue("gain") ;
-    float rawGain = juce::Decibels::decibelsToGain(dbGain) ;
+    auto bufferSize = buffer.getNumSamples() ;
+    auto delayBufferSize = delayBuffer.getNumSamples() ;
+    
+    //float dbGain = *treeState.getRawParameterValue("gain") ;
+    //float rawGain = juce::Decibels::decibelsToGain(dbGain) ;
     
     //float rawDist = *treeState.getRawParameterValue("dist") ;
         
@@ -175,8 +169,31 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
     {
         auto* channelData = buffer.getWritePointer (channel);
         
+        // Checks if main buffer can copy to delay buffer without needing to wrap
+        if (delayBufferSize > bufferSize + writePosition)
+        {
+            // Copy main buffer contents to delay buffer
+            delayBuffer.copyFromWithRamp(channel, writePosition, channelData, bufferSize, 0.1f, 0.1f) ;
+        }
+        else
+        {
+            // Determine how much space is left at the end of the delay buffer
+            auto numSamplesToEnd = delayBufferSize - writePosition ;
+            
+            // Copy that number of contents to the end
+            delayBuffer.copyFromWithRamp(channel, writePosition, channelData, numSamplesToEnd, 0.1f, 0.1f) ;
+            
+            // Determine how much contents is remaining to copy
+            auto numSamplesAtStart = bufferSize - numSamplesToEnd ;
+            
+            // Copy remaining amount to beginning of delay buffer
+            delayBuffer.copyFromWithRamp(channel, 0, channelData + numSamplesToEnd, numSamplesAtStart, 0.1f, 0.1f) ;
+            
+        }
+        
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
+        
             //*channelData *= 15.0 ;
             //*channelData = (2.f / juce::MathConstants<float>::pi) * atan(distOnSlider * *channelData) ;
             
@@ -189,6 +206,16 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
             //channelData++;
         }
     }
+    
+    
+//    TESTING DELAY BUFFER WRAP AROUND
+//    DBG ("Delay Buffer Size: " << delayBufferSize);
+//    DBG ("Buffer Size: " << bufferSize);
+//    DBG ("Write Position: " << writePosition);
+    
+    writePosition += bufferSize ;
+    writePosition %= delayBufferSize ;
+    
 }
 
 //==============================================================================
