@@ -205,6 +205,18 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
             
             //channelData++;
         }
+        auto* channelData = buffer.getReadPointer(channel);
+
+        int start1, size1, start2, size2;
+        fifo.prepareToWrite(buffer.getNumSamples(), start1, size1, start2, size2);
+
+        if (size1 > 0)
+            visualBuffer.copyFrom(channel, start1, channelData, size1);
+
+        if (size2 > 0)
+            visualBuffer.copyFrom(channel, start2, channelData + size1, size2);
+
+        fifo.finishedWrite(size1 + size2);
     }
     
     
