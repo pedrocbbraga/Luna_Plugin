@@ -16,7 +16,7 @@
     This component lives inside our window, and this is where you should put all
     your controls and content.
 */
-class MainComponent   : public juce::AnimatedAppComponent
+class MainComponent : public juce::AnimatedAppComponent
 {
 public:
     //==============================================================================
@@ -30,6 +30,9 @@ public:
     //==============================================================================
     void paint (juce::Graphics& g) override;
     void resized() override;
+    void addNewSample (float newSample);
+    
+    void timerCallback() override;
 
 private:
     //==============================================================================

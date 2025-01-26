@@ -7,8 +7,7 @@ MainComponent::MainComponent(LunaAudioProcessor& p)
     // Make sure you set the size of the component after
     // you add any child components.
     setSize (300, 225);
-    setFramesPerSecond (120); // This sets the frequency of the update calls.
-    
+    setFramesPerSecond (60); // This sets the frequency of the update calls.
     
     // Attach OpenGLContext to render using OpenGL *****************************
     openGLContext.attachTo (*this); // Use OpenGL to render just this Component
@@ -68,18 +67,20 @@ void MainComponent::update()
 //    }
     const auto& delayBuffer = processor.getDelayBuffer();
 
-        if (delayBuffer.getNumChannels() > 0)
-        {
-            auto* readPointer = delayBuffer.getReadPointer(0); // Assuming mono visualization
-            int bufferSize = delayBuffer.getNumSamples();
+    if (delayBuffer.getNumChannels() > 0)
+    {
+        auto* readPointer = delayBuffer.getReadPointer(0); // Assuming mono visualization
+        int bufferSize = delayBuffer.getNumSamples();
 
-            // Map audio buffer data to `partsHeight`
-            for (int i = 0; i < PARTS; ++i)
-            {
-                int bufferIndex = juce::jmap(i, 0, PARTS, 0, bufferSize - 1);
-                partsHeight[i] = readPointer[bufferIndex] * getHeight() / 2.0f;
-            }
+        // Map audio buffer data to `partsHeight`
+        for (int i = 0; i < bufferSize; ++i)
+        {
+//                int bufferIndex = juce::jmap(i, 0, PARTS, 0, bufferSize - 1);
+//                partsHeight[i] = readPointer[bufferIndex] * getHeight() / 2.0f;
+            addNewSample(readPointer[i] * 1000.0f);
         }
+    }
+    repaint();
 }
 
 //==============================================================================
@@ -92,24 +93,51 @@ void MainComponent::paint (juce::Graphics& g)
     // Draws the sine wave segments
     g.setColour (juce::Colour {0xFF129183});
     
-    int partIndexOffset = -(PARTS / 2);
-    for (auto & partHeight : partsHeight)
+//    int partIndexOffset = -(PARTS / 2);
+    
+    const int numParts = static_cast<int>(partsHeight.size());
+    const float partWidth = static_cast<float>(getWidth()) / numParts; // Width of each segment
+    
+//    for (auto & partHeight : partsHeight)
+//    {
+//        
+//        // RECTANGLES/LINES THAT FILL UP THE AUDIO WAVE
+//        if (partHeight > 0.0f)
+//        {
+//            g.fillRect (getPartDistanceOffset (partIndexOffset), getHeight() / 2.0f - partHeight, INCREMENT, std::fabs (partHeight));
+//        }
+//        else if (partHeight < 0.0f)
+//        {
+//            g.fillRect (getPartDistanceOffset (partIndexOffset), getHeight() / 2.0f, INCREMENT, std::fabs (partHeight));
+//        }
+//        else if (partHeight == 0)
+//        {
+//            g.fillRect (getPartDistanceOffset (partIndexOffset), getHeight() / 2.0f, INCREMENT, std::fabs (partHeight));
+//        }
+//        
+//        // LITTLE BALL AT THE TOP/BOTTOM OF EACH LINE OF THE AUDIO WAVE
+//        //g.fillEllipse (getPartDistanceOffset (partIndexOffset) - 4.0f, getHeight() / 2.0f - partHeight, 10.0f, 10.0f);
+//    
+//        partIndexOffset++;
+//    }
+    for (int i = 0; i < numParts; ++i)
     {
+        const float x = i * partWidth;          // X position
+        const float centerY = getHeight() / 2; // Vertical center
+        const float partHeight = partsHeight[i]; // Current sample height
         
-        // RECTANGLES/LINES THAT FILL UP THE AUDIO WAVE
         if (partHeight > 0.0f)
         {
-            g.fillRect (getPartDistanceOffset (partIndexOffset), getHeight() / 2.0f - partHeight, INCREMENT, std::fabs (partHeight));
+            g.fillRect(x, centerY - partHeight, partWidth, std::fabs(partHeight));
         }
         else if (partHeight < 0.0f)
         {
-            g.fillRect (getPartDistanceOffset (partIndexOffset), getHeight() / 2.0f, INCREMENT, std::fabs (partHeight));
+            g.fillRect(x, centerY, partWidth, std::fabs(partHeight));
         }
-        
-        // LITTLE BALL AT THE TOP/BOTTOM OF EACH LINE OF THE AUDIO WAVE
-        //g.fillEllipse (getPartDistanceOffset (partIndexOffset) - 4.0f, getHeight() / 2.0f - partHeight, 10.0f, 10.0f);
-    
-        partIndexOffset++;
+        else
+        {
+            g.fillRect(x, centerY, partWidth, 1.0f); // Small rectangle for zero values
+        }
     }
 }
 
@@ -118,4 +146,17 @@ void MainComponent::resized()
     // This is called when the MainContentComponent is resized.
     // If you add any child components, this is where you should
     // update their positions.
+}
+
+void MainComponent::addNewSample(float newSample)
+{
+    if (partsHeight.size() < 512)
+    {
+        partsHeight.push_back(newSample); // Fill up the vector initially
+    }
+    else
+    {
+        std::rotate(partsHeight.begin(), partsHeight.begin() + 1, partsHeight.end()); // Shift left
+        partsHeight.back() = newSample; // Add the newest sample at the end
+    }
 }
