@@ -77,7 +77,7 @@ void MainComponent::update()
             for (int i = 0; i < PARTS; ++i)
             {
                 int bufferIndex = juce::jmap(i, 0, PARTS, 0, bufferSize - 1);
-                partsHeight[i] = readPointer[bufferIndex] * getHeight() / 2.0f;
+                partsHeight[i] = readPointer[bufferIndex] * getHeight() * 4.0f;
             }
         }
 }
