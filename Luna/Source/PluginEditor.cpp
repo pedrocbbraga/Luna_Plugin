@@ -12,7 +12,7 @@
 
 //==============================================================================
 LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p), mainComponent()
+    : AudioProcessorEditor (&p), audioProcessor (p), mainComponent(p)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.

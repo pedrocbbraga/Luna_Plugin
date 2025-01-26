@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "PluginProcessor.h"
 
 //==============================================================================
 /*
@@ -19,7 +20,8 @@ class MainComponent   : public juce::AnimatedAppComponent
 {
 public:
     //==============================================================================
-    MainComponent();
+    //MainComponent();
+    MainComponent(LunaAudioProcessor& processor);
     ~MainComponent();
 
     //==============================================================================
@@ -31,6 +33,8 @@ public:
 
 private:
     //==============================================================================
+    LunaAudioProcessor& processor;
+    
     juce::OpenGLContext openGLContext; // The instance to use OpenGL
     
     // Animation Variables =====================================================

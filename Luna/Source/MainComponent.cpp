@@ -1,8 +1,8 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent()
-    : partsHeight (PARTS, 0.0f)
+MainComponent::MainComponent(LunaAudioProcessor& p)
+    : processor(p), partsHeight(PARTS, 0.0f)
 {
     // Make sure you set the size of the component after
     // you add any child components.
@@ -33,39 +33,53 @@ void MainComponent::update()
     
     
     // Makes wave go forward?
-    if (isForward)
-    {
-        centeredXPosition += INCREMENT;
-        if (centeredXPosition + INCREMENT > getWidth() + 200)
+//    if (isForward)
+//    {
+//        centeredXPosition += INCREMENT;
+//        if (centeredXPosition + INCREMENT > getWidth() + 200)
+//        {
+//            isForward = false;
+//            centeredXPosition -= INCREMENT;
+//            centeredXPosition -= INCREMENT;
+//        }
+//    }
+//    
+//    // Makes wave go backward?
+//    else
+//    {
+//        centeredXPosition -= INCREMENT;
+//        if (centeredXPosition < 0.0f)
+//        {
+//            isForward = true;
+//            centeredXPosition += INCREMENT;
+//            centeredXPosition += INCREMENT;
+//        }
+//    }
+//    
+//    int partIndexOffset = -(PARTS / 2);
+//    
+//    // I'm under the impression that if we change the source of this for loop to *channelData,
+//    // this will print our audio data.
+//    // We might also have to change the jawn that makes it go backwards after going forward
+//    for (auto & partHeight : partsHeight)
+//    {
+//        partHeight = sin (getPartDistanceOffset (partIndexOffset) / getWidth() * 20.0f) * 75.0f;
+//        partIndexOffset++;
+//    }
+    const auto& delayBuffer = processor.getDelayBuffer();
+
+        if (delayBuffer.getNumChannels() > 0)
         {
-            isForward = false;
-            centeredXPosition -= INCREMENT;
-            centeredXPosition -= INCREMENT;
+            auto* readPointer = delayBuffer.getReadPointer(0); // Assuming mono visualization
+            int bufferSize = delayBuffer.getNumSamples();
+
+            // Map audio buffer data to `partsHeight`
+            for (int i = 0; i < PARTS; ++i)
+            {
+                int bufferIndex = juce::jmap(i, 0, PARTS, 0, bufferSize - 1);
+                partsHeight[i] = readPointer[bufferIndex] * getHeight() / 2.0f;
+            }
         }
-    }
-    
-    // Makes wave go backward?
-    else
-    {
-        centeredXPosition -= INCREMENT;
-        if (centeredXPosition < 0.0f)
-        {
-            isForward = true;
-            centeredXPosition += INCREMENT;
-            centeredXPosition += INCREMENT;
-        }
-    }
-    
-    int partIndexOffset = -(PARTS / 2);
-    
-    // I'm under the impression that if we change the source of this for loop to *channelData,
-    // this will print our audio data.
-    // We might also have to change the jawn that makes it go backwards after going forward
-    for (auto & partHeight : partsHeight)
-    {
-        partHeight = sin (getPartDistanceOffset (partIndexOffset) / getWidth() * 20.0f) * 75.0f;
-        partIndexOffset++;
-    }
 }
 
 //==============================================================================

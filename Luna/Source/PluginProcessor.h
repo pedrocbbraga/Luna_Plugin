@@ -58,6 +58,8 @@ public:
     
     float distOnSlider;
     
+    const juce::AudioBuffer<float>& getDelayBuffer() const { return delayBuffer; }
+    
 private:
     
     juce::AudioBuffer<float> delayBuffer ;
