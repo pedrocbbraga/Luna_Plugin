@@ -150,6 +150,8 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
 
+    visualBuffer.setSize(totalNumInputChannels, buffer.getNumSamples());
+    
     // In case we have more outputs than inputs, this code clears any output
     // channels that didn't contain input data, (because these aren't
     // guaranteed to be empty - they may contain garbage).
@@ -159,6 +161,10 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
+    float frequency = 420.0f; // Frequency in Hz
+    float amplitude = 1.0f;   // Signal amplitude
+    static float phase = 0.0f;
+    float phaseIncrement = (2.0f * juce::MathConstants<float>::pi * frequency) / getSampleRate();
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
     // Make sure to reset the state if your inner loop is processing
@@ -174,13 +180,18 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         auto* channelData = buffer.getWritePointer (channel);
+        const auto* inputChannelData = buffer.getReadPointer(channel);
         
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
             //*channelData *= 15.0 ;
-            //*channelData = (2.f / juce::MathConstants<float>::pi) * atan(distOnSlider * *channelData) ;
+            //*channelData = (2.f / juce::  MathConstants<float>::pi) * atan(distOnSlider * *channelData) ;
             
-            //channelData[sample] *= rawGain ;
+//            channelData[sample] *= rawGain ;
+            channelData[sample] = amplitude * std::sin(phase);
+            phase += phaseIncrement;
+            if (phase >= 2.0f * juce::MathConstants<float>::pi)
+                            phase -= 2.0f * juce::MathConstants<float>::pi;
             
             // Soft Diode Clipping Function Test
             //*channelData = std::tanh(2.0f * *channelData) / std::tanh(*channelData) ;
@@ -188,7 +199,20 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
             
             //channelData++;
         }
+//        auto* visualChannelData = buffer.getReadPointer(channel);
+
+        int start1, size1, start2, size2;
+        fifo.prepareToWrite(buffer.getNumSamples(), start1, size1, start2, size2);
+
+        if (size1 > 0)
+            visualBuffer.copyFrom(channel, start1, inputChannelData, size1);
+
+        if (size2 > 0)
+            visualBuffer.copyFrom(channel, start2, inputChannelData + size1, size2);
+
+        fifo.finishedWrite(size1 + size2);
     }
+    
 }
 
 //==============================================================================

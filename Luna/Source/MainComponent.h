@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "PluginProcessor.h"
 
 //==============================================================================
 /*
@@ -19,8 +20,8 @@ class MainComponent   : public juce::AnimatedAppComponent
 {
 public:
     //==============================================================================
-    MainComponent();
-    ~MainComponent();
+    MainComponent(LunaAudioProcessor& processor);
+    ~MainComponent() override;
 
     //==============================================================================
     void update() override;
@@ -35,7 +36,7 @@ private:
     
     // Animation Variables =====================================================
     float centeredXPosition { 0.0f };
-    static constexpr int PARTS = 600;
+    static constexpr int PARTS = 512;
     std::vector<float> partsHeight;
     
     static constexpr float INCREMENT { 2.0f };
@@ -49,4 +50,7 @@ private:
     }
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
+    LunaAudioProcessor& audioProcessor;  // Reference to the audio processor
+    
+
 };
