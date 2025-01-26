@@ -59,6 +59,9 @@ void MainComponent::update()
         partsHeight[i] = sample / numChannels * 200.0f;  // Adjust scaling to fit your display needs
     }
     
+    auto& fifo = audioProcessor.getFifo();
+    fifo.finishedRead(numSamples);
+    
     repaint();
     // This function is called at the frequency specified by the setFramesPerSecond() call
     // in the constructor. You can use it to update counters, animate values, etc.

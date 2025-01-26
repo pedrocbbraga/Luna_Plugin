@@ -59,7 +59,7 @@ public:
     float distOnSlider;
     
     const juce::AudioBuffer<float>& getVisualBuffer() const { return visualBuffer; }
-    const juce::AbstractFifo& getFifo() const { return fifo; }
+    juce::AbstractFifo& getFifo() { return fifo; }
     //Getter for the private fifo and visualBuffer variables
     
 private:
