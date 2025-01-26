@@ -77,7 +77,7 @@ void MainComponent::update()
         {
 //                int bufferIndex = juce::jmap(i, 0, PARTS, 0, bufferSize - 1);
 //                partsHeight[i] = readPointer[bufferIndex] * getHeight() / 2.0f;
-            addNewSample(readPointer[i] * 1000.0f);
+            addNewSample(readPointer[i] * 1000.0f, bufferSize);
         }
     }
     repaint();
@@ -148,9 +148,9 @@ void MainComponent::resized()
     // update their positions.
 }
 
-void MainComponent::addNewSample(float newSample)
+void MainComponent::addNewSample(float newSample, int sampleAmt)
 {
-    if (partsHeight.size() < 512)
+    if (partsHeight.size() < sampleAmt)
     {
         partsHeight.push_back(newSample); // Fill up the vector initially
     }

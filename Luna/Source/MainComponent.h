@@ -30,10 +30,8 @@ public:
     //==============================================================================
     void paint (juce::Graphics& g) override;
     void resized() override;
-    void addNewSample (float newSample);
+    void addNewSample (float newSample, int sampleAmt);
     
-    void timerCallback() override;
-
 private:
     //==============================================================================
     LunaAudioProcessor& processor;
