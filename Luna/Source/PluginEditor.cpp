@@ -28,15 +28,25 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     
     setSize (800, 600);
     
-    distSlider.setSliderStyle (juce::Slider::LinearBarVertical);
-    distSlider.setRange (0.0, 100.0, 1.0);
-    distSlider.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
-    distSlider.setPopupDisplayEnabled (true, false, this);
-    distSlider.setTextValueSuffix (" Distortion");
-    distSlider.setValue(1.0);
-    distSlider.addListener(this);
+    /* ----------- DIST SLIDER A ----------- */
+    distSliderA.setSliderStyle (juce::Slider::RotaryHorizontalDrag);
+    distSliderA.setRange (0.0, 10.0, 0.0);
+    distSliderA.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
+    distSliderA.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
+    distSliderA.setPopupDisplayEnabled (true, false, this);
+    distSliderA.setTextValueSuffix (" Distortion");
+    distSliderA.addListener(this);
+    addAndMakeVisible (&distSliderA);
     
-    addAndMakeVisible (&distSlider);
+    /* ----------- DIST SLIDER B ----------- */
+    distSliderB.setSliderStyle (juce::Slider::RotaryHorizontalDrag);
+    distSliderB.setRange (0.0, 10.0, 0.0);
+    distSliderB.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
+    distSliderB.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
+    distSliderB.setPopupDisplayEnabled (true, false, this);
+    distSliderB.setTextValueSuffix (" Distortion");
+    distSliderB.addListener(this);
+    addAndMakeVisible (&distSliderB);
     
     
     // THIS TURNS THE AUDIO WAVE JAWN ON/OFF
@@ -67,11 +77,14 @@ void LunaAudioProcessorEditor::resized()
     // subcomponents in your editor..
     
     // sets the position and size of the slider with arguments (x, y, width, height)
-    distSlider.setBounds (40, 30, 20, getHeight() - 60);
+    distSliderA.setBounds(150, 200, 200, 200);
+    distSliderB.setBounds(450, 200, 200, 200);
     mImageComponent.setBoundsRelative(0.0f, 0.0f, 1.0f, 1.0f);
 }
 
 void LunaAudioProcessorEditor::sliderValueChanged (juce::Slider* slider)
 {
-    audioProcessor.distOnSlider = distSlider.getValue();
+    audioProcessor.a = distSliderA.getValue();
+    audioProcessor.b = distSliderB.getValue();
+    
 }

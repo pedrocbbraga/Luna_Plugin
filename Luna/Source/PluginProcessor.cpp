@@ -198,18 +198,22 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
             //channelData[sample] *= rawGain ;
             
             // Soft Diode Clipping Function Test
-            float a = 1.0f ;
-            float b = 2.0f ;
+            //float a = 1.0f ;
+            //float b = 2.0f ;
+            
+            
             
             if (channelData[sample] != 0)
             {
                 //channelData[sample] = std::tanh(3.0f * channelData[sample]) / std::tanh(channelData[sample]) ;
                 if (channelData[sample] > 0)
                 {
+                    DBG("a: " << a);
                     channelData[sample] = sqrt( ( ( 1 + pow(a, 2) ) * sin(channelData[sample]) ) / ( 1 + pow(a, 2) * pow(sin(channelData[sample]), 2) ) ) ;
                 }
                 if (channelData[sample] < 0)
                 {
+                    DBG("b: " << b);
                     channelData[sample] = - sqrt( ( ( 1 + pow(b, 2) ) * fabs( sin(channelData[sample]) ) ) / ( 1 + pow(b, 2) * pow(sin(channelData[sample]), 2) ) ) ;
                 }
             }

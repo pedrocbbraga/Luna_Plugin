@@ -56,7 +56,8 @@ public:
     //** Value Trees =========================================================*/
     juce::AudioProcessorValueTreeState treeState;
     
-    float distOnSlider;
+    float a;
+    float b;
     
     const juce::AudioBuffer<float>& getDelayBuffer() const { return delayBuffer; }
     
