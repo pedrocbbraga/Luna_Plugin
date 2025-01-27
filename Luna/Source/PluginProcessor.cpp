@@ -111,7 +111,7 @@ void LunaAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
     
-    auto delayBufferSize = sampleRate * 2.0 ;
+    auto delayBufferSize = 1024 ;
     delayBuffer.setSize(getTotalNumOutputChannels(), (int)delayBufferSize) ;
 }
 
