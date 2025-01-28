@@ -17,6 +17,8 @@
     <FILE id="m80RVT" name="PluginProcessor.h" compile="0" resource="0"
           file="Source/PluginProcessor.h"/>
     <GROUP id="{2495D1FE-40BB-08C1-F9D7-4C3B374CD821}" name="Resources">
+      <FILE id="GKocQy" name="luna_ui_bg_800_600_1.png" compile="0" resource="1"
+            file="Resources/luna_ui_bg_800_600_1.png"/>
       <FILE id="wH7EPd" name="LunaPluginBG.png" compile="0" resource="1"
             file="Resources/LunaPluginBG.png"/>
       <FILE id="O8vyNf" name="sad_mickey.png" compile="0" resource="1" file="Resources/sad_mickey.png"/>
