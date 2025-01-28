@@ -35,6 +35,7 @@ private:
     
     juce::Slider distSliderA ;
     juce::Slider distSliderB ;
+    juce::Slider dryWet ;
     
     MainComponent mainComponent;
 
