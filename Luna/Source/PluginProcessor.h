@@ -61,10 +61,6 @@ public:
     
     const juce::AudioBuffer<float>& getDelayBuffer() const { return delayBuffer; }
     
-    const juce::AudioBuffer<float>& getVisualBuffer() const { return visualBuffer; }
-    juce::AbstractFifo& getFifo() { return fifo; }
-    //Getter for the private fifo and visualBuffer variables
-    
 private:
     
     juce::AudioBuffer<float> delayBuffer ;
@@ -75,8 +71,4 @@ private:
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LunaAudioProcessor)
-    
-    juce::AudioBuffer<float> visualBuffer; // Buffer for visualization
-    juce::AbstractFifo fifo { 512 };     // FIFO with a fixed size of 512 samples
-    
 };

@@ -66,7 +66,7 @@ void LunaAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (juce::Colours::whitesmoke);
-        
+
     g.setColour (juce::Colours::black);
     g.setFont (juce::FontOptions (22.0f));
     g.drawFittedText ("Luna Plugin on fucking god boul", getLocalBounds(), juce::Justification::bottomLeft, 1);
@@ -82,7 +82,6 @@ void LunaAudioProcessorEditor::resized()
     distSliderA.setBounds(150, 200, 200, 200);
     distSliderB.setBounds(450, 200, 200, 200);
     mImageComponent.setBoundsRelative(0.0f, 0.0f, 1.0f, 1.0f);
-    mainComponent.setBounds(getLocalBounds());
 }
 
 void LunaAudioProcessorEditor::sliderValueChanged (juce::Slider* slider)

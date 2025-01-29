@@ -1,7 +1,4 @@
 #include "MainComponent.h"
-#include "PluginProcessor.h"
-#include "PluginEditor.h"
-
 
 //==============================================================================
 MainComponent::MainComponent(LunaAudioProcessor& p)
@@ -13,46 +10,20 @@ MainComponent::MainComponent(LunaAudioProcessor& p)
     setFramesPerSecond (60); // This sets the frequency of the update calls.
     
     // Attach OpenGLContext to render using OpenGL *****************************
-//    openGLContext.attachTo (*this); // Use OpenGL to render just this Component
+    openGLContext.attachTo (*this); // Use OpenGL to render just this Component
     
     /* The following alternative line uses OpenGL to render the top level parent
        Component and all sub Components. */
     // openGLContext.attachTo (*getTopLevelComponent());
-//    auto& processor = static_cast<LunaAudioProcessor&> (audioProcessor);
-
 }
 
 MainComponent::~MainComponent()
 {
-    openGLContext.detach();
 }
 
 //==============================================================================
 void MainComponent::update()
 {
-    
-    auto& visualBuffer = audioProcessor.getVisualBuffer();
-    int numSamples = visualBuffer.getNumSamples();
-    int numChannels = visualBuffer.getNumChannels();
-//    
-//    DBG("The value of numSamples is: " << numSamples);
-//    DBG("The value of partsHeight.size() is: " << partsHeight.size());
-    for (int i = 0; i < numSamples && i < partsHeight.size(); ++i)
-    {
-        float sample = 0.0f;
-        for (int channel = 0; channel < numChannels; ++channel)
-        {
-            sample += visualBuffer.getReadPointer(channel)[i];
-        }
-        
-        // Average across all channels and scale it for the visualization
-        partsHeight[i] = sample / numChannels * 200.0f;  // Adjust scaling to fit your display needs
-    }
-    
-    auto& fifo = audioProcessor.getFifo();
-    fifo.finishedRead(numSamples);
-    
-    repaint();
     // This function is called at the frequency specified by the setFramesPerSecond() call
     // in the constructor. You can use it to update counters, animate values, etc.
     
