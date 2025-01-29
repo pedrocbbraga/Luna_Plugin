@@ -33,7 +33,9 @@ private:
     // access the processor object that created it.
     LunaAudioProcessor& audioProcessor;
     
-    juce::Slider distSlider ;
+    juce::Slider distSliderA ;
+    juce::Slider distSliderB ;
+    juce::Slider dryWet ;
     
     MainComponent mainComponent;
 

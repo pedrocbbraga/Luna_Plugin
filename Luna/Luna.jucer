@@ -4,6 +4,8 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="Braga DSP"
               pluginFormats="buildAAX,buildAU,buildStandalone,buildVST3" pluginAAXCategory="8192">
   <MAINGROUP id="oC3VNQ" name="Luna">
+    <FILE id="eaHhmE" name="LunaUIBackgroundLiam.png" compile="0" resource="1"
+          file="Resources/LunaUIBackgroundLiam.png"/>
     <FILE id="wbIUDt" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
     <FILE id="ecQbdy" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
     <FILE id="LETFm4" name="MainComponent.cpp" compile="1" resource="0"
@@ -17,6 +19,8 @@
     <FILE id="m80RVT" name="PluginProcessor.h" compile="0" resource="0"
           file="Source/PluginProcessor.h"/>
     <GROUP id="{2495D1FE-40BB-08C1-F9D7-4C3B374CD821}" name="Resources">
+      <FILE id="GKocQy" name="luna_ui_bg_800_600_1.png" compile="0" resource="1"
+            file="Resources/luna_ui_bg_800_600_1.png"/>
       <FILE id="wH7EPd" name="LunaPluginBG.png" compile="0" resource="1"
             file="Resources/LunaPluginBG.png"/>
       <FILE id="O8vyNf" name="sad_mickey.png" compile="0" resource="1" file="Resources/sad_mickey.png"/>

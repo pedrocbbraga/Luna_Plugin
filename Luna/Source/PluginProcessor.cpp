@@ -111,7 +111,7 @@ void LunaAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
     
-    auto delayBufferSize = sampleRate * 2.0 ;
+    auto delayBufferSize = 1024 ;
     delayBuffer.setSize(getTotalNumOutputChannels(), (int)delayBufferSize) ;
 }
 
@@ -181,8 +181,6 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
     
     //float dbGain = *treeState.getRawParameterValue("gain") ;
     //float rawGain = juce::Decibels::decibelsToGain(dbGain) ;
-    
-    //float rawDist = *treeState.getRawParameterValue("dist") ;
         
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
@@ -214,8 +212,8 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
         
-            //*channelData *= 15.0 ;
-            //*channelData = (2.f / juce::  MathConstants<float>::pi) * atan(distOnSlider * *channelData) ;
+            //channelData[sample] *= 15.0f ;
+            //channelData[sample] = (2.f / juce::MathConstants<float>::pi) * atan(distOnSlider * channelData[sample]) ;
             
 //            channelData[sample] *= rawGain ;
 //            channelData[sample] = amplitude * std::sin(phase);
@@ -224,10 +222,26 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
 //                            phase -= 2.0f * juce::MathConstants<float>::pi;
             
             // Soft Diode Clipping Function Test
-            //*channelData = std::tanh(2.0f * *channelData) / std::tanh(*channelData) ;
-            //*channelData *= 0.3 ;
+            //float a = 1.0f ;
+            //float b = 2.0f ;
             
-            //channelData++;
+            
+            
+            if (channelData[sample] != 0)
+            {
+                //channelData[sample] = std::tanh(3.0f * channelData[sample]) / std::tanh(channelData[sample]) ;
+                if (channelData[sample] > 0)
+                {
+                    channelData[sample] = sqrt( ( ( 1 + pow(a, 2) ) * sin(channelData[sample]) ) / ( 1 + pow(a, 2) * pow(sin(channelData[sample]), 2) ) ) ;
+                }
+                if (channelData[sample] < 0)
+                {
+                    channelData[sample] = - sqrt( ( ( 1 + pow(b, 2) ) * fabs( sin(channelData[sample]) ) ) / ( 1 + pow(b, 2) * pow(sin(channelData[sample]), 2) ) ) ;
+                }
+            }
+            
+            channelData[sample] *= 0.3f ;
+            
         }
 //        auto* visualChannelData = buffer.getReadPointer(channel);
 
