@@ -139,6 +139,7 @@ bool LunaAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) con
 }
 #endif
 
+//=PROCESS BLOCK=======================================================================================
 void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
