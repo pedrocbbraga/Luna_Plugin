@@ -1,11 +1,3 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include "MainComponent.h"
@@ -29,7 +21,7 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     setSize (800, 600);
     
     /* ----------- DIST SLIDER A ----------- */
-    distSliderA.setSliderStyle (juce::Slider::RotaryHorizontalDrag);
+    distSliderA.setSliderStyle (juce::Slider::RotaryVerticalDrag);
     distSliderA.setRange (0.0, 10.0, 0.0);
     distSliderA.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
     distSliderA.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
@@ -39,7 +31,7 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     addAndMakeVisible (&distSliderA);
     
     /* ----------- DIST SLIDER B ----------- */
-    distSliderB.setSliderStyle (juce::Slider::RotaryHorizontalDrag);
+    distSliderB.setSliderStyle (juce::Slider::RotaryVerticalDrag);
     distSliderB.setRange (0.0, 10.0, 0.0);
     distSliderB.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
     distSliderB.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
@@ -47,9 +39,6 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     distSliderB.setTextValueSuffix (" Distortion");
     distSliderB.addListener(this);
     addAndMakeVisible (&distSliderB);
-    
-    
-    
     
     // THIS TURNS THE AUDIO WAVE JAWN ON/OFF
     addAndMakeVisible(mainComponent);
@@ -64,7 +53,6 @@ LunaAudioProcessorEditor::~LunaAudioProcessorEditor()
 //==============================================================================
 void LunaAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (juce::Colours::whitesmoke);
 
     g.setColour (juce::Colours::black);
@@ -75,9 +63,6 @@ void LunaAudioProcessorEditor::paint (juce::Graphics& g)
 
 void LunaAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
-    
     // sets the position and size of the slider with arguments (x, y, width, height)
     distSliderA.setBounds(150, 200, 200, 200);
     distSliderB.setBounds(450, 200, 200, 200);

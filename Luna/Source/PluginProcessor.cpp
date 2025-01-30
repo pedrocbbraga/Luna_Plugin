@@ -1,14 +1,6 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
 /*fart*/
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
-//#include <juce_dsp/maths/juce_FastMathApproximations.h>
 #include <cmath>
 
 //==============================================================================
@@ -192,16 +184,7 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
         
-            //channelData[sample] *= 15.0f ;
             //channelData[sample] = (2.f / juce::MathConstants<float>::pi) * atan(distOnSlider * channelData[sample]) ;
-            
-            //channelData[sample] *= rawGain ;
-            
-            // Soft Diode Clipping Function Test
-            //float a = 1.0f ;
-            //float b = 2.0f ;
-            
-            
             
             if (channelData[sample] != 0)
             {
