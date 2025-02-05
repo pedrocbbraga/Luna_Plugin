@@ -21,13 +21,8 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     setSize (800, 600);
     
     /* ----------- DIST SLIDER A ----------- */
-<<<<<<< Updated upstream
-    distSliderA.setSliderStyle (juce::Slider::RotaryVerticalDrag);
-    distSliderA.setRange (0.0, 10.0, 0.0);
-=======
     distSliderA.setSliderStyle (juce::Slider::RotaryHorizontalDrag);
     distSliderA.setRange (0.0, 100.0, 1.0);
->>>>>>> Stashed changes
     distSliderA.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
     distSliderA.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
     distSliderA.setPopupDisplayEnabled (true, false, this);
@@ -36,13 +31,8 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     addAndMakeVisible (&distSliderA);
     
     /* ----------- DIST SLIDER B ----------- */
-<<<<<<< Updated upstream
-    distSliderB.setSliderStyle (juce::Slider::RotaryVerticalDrag);
-    distSliderB.setRange (0.0, 10.0, 0.0);
-=======
     distSliderB.setSliderStyle (juce::Slider::RotaryHorizontalDrag);
     distSliderB.setRange (0.0, 100.0, 1.0);
->>>>>>> Stashed changes
     distSliderB.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
     distSliderB.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
     distSliderB.setPopupDisplayEnabled (true, false, this);
@@ -50,8 +40,6 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     distSliderB.addListener(this);
     addAndMakeVisible (&distSliderB);
     
-<<<<<<< Updated upstream
-=======
     /*------------ DRY WET SLIDER -----------*/
     dryWet.setSliderStyle(juce::Slider::LinearHorizontal);
     dryWet.setRange(0.0, 100.0, 1.0);
@@ -62,8 +50,7 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     dryWet.addListener(this);
     addAndMakeVisible (&dryWet);
     
-    
->>>>>>> Stashed changes
+
     // THIS TURNS THE AUDIO WAVE JAWN ON/OFF
     addAndMakeVisible(mainComponent);
     mainComponent.setBounds(500, 400, 300, 225) ;
