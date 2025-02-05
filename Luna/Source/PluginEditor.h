@@ -3,6 +3,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "MainComponent.h"
+#include "MoonSlider.h"
 
 //==============================================================================
 /**
@@ -30,6 +31,8 @@ private:
     juce::Slider dryWet ;
     
     MainComponent mainComponent;
+    
+    MoonSlider moonSlider;
 
     juce::ImageComponent mImageComponent;
     
