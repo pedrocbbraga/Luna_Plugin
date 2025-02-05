@@ -10,15 +10,15 @@
 
 #include "MoonSlider.h"
 
-MoonPhaseSlider::MoonPhaseSlider()
+MoonSlider::MoonSlider()
 {
     setRange(0.0, 1.0, 0.01);
     setSliderStyle(juce::Slider::LinearHorizontal);
 }
 
-MoonPhaseSlider::~MoonPhaseSlider() {}
+MoonSlider::~MoonSlider() {}
 
-void MoonPhaseSlider::paint(juce::Graphics& g)
+void MoonSlider::paint(juce::Graphics& g)
 {
     g.fillAll(juce::Colours::black);
     g.setColour(juce::Colours::white);
@@ -30,7 +30,7 @@ void MoonPhaseSlider::paint(juce::Graphics& g)
     g.fillEllipse(x, y, diameter, diameter);
 }
 
-void MoonPhaseSlider::resized()
+void MoonSlider::resized()
 {
     // Called when the slider is resized (useful for OpenGL later)
 }

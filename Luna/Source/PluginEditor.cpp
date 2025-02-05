@@ -46,6 +46,8 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     mainComponent.setBounds(500, 400, 300, 225) ;
     
     addAndMakeVisible(moonSlider);
+    moonSlider.setBounds(250, 175, 300, 225) ;
+    
     
     
 

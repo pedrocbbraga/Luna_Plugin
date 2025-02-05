@@ -12,15 +12,15 @@
 
 #include <JuceHeader.h>
 
-class MoonPhaseSlider : public juce::Slider
+class MoonSlider : public juce::Slider
 {
 public:
-    MoonPhaseSlider();
-    ~MoonPhaseSlider() override;
+    MoonSlider();
+    ~MoonSlider() override;
 
     void paint(juce::Graphics& g) override;
     void resized() override;
 
 private:
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MoonPhaseSlider)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MoonSlider)
 };
