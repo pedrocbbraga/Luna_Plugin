@@ -45,8 +45,10 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     addAndMakeVisible(mainComponent);
     mainComponent.setBounds(500, 400, 300, 225) ;
     
+    // Moon circle make visible + setter
     addAndMakeVisible(moonSlider);
     moonSlider.setBounds(250, 175, 300, 225) ;
+//    moonSlider.setAlwaysOnTop( true );
     
     
     

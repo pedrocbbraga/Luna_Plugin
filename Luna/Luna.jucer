@@ -25,6 +25,7 @@
             file="Resources/luna_ui_bg_800_600_1.png"/>
       <FILE id="wH7EPd" name="LunaPluginBG.png" compile="0" resource="1"
             file="Resources/LunaPluginBG.png"/>
+      <FILE id="PoaN1M" name="MoonImage.jpg" compile="0" resource="1" file="Resources/MoonImage.jpg"/>
       <FILE id="O8vyNf" name="sad_mickey.png" compile="0" resource="1" file="Resources/sad_mickey.png"/>
     </GROUP>
   </MAINGROUP>
