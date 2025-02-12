@@ -50,6 +50,9 @@ public:
     
     float a;
     float b;
+    float dw;
+    float dist_sample_value;
+    
     
     const juce::AudioBuffer<float>& getDelayBuffer() const { return delayBuffer; }
     

@@ -192,15 +192,17 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
                 //channelData[sample] = std::tanh(3.0f * channelData[sample]) / std::tanh(channelData[sample]) ;
                 if (channelData[sample] > 0)
                 {
-                    channelData[sample] = sqrt( ( ( 1 + pow(a, 2) ) * sin(channelData[sample]) ) / ( 1 + pow(a, 2) * pow(sin(channelData[sample]), 2) ) ) ;
+                    dist_sample_value = sqrt( ( ( 1 + pow(a, 2) ) * sin(channelData[sample]) ) / ( 1 + pow(a, 2) * pow(sin(channelData[sample]), 2) ) ) ;
                 }
                 if (channelData[sample] < 0)
                 {
-                    channelData[sample] = - sqrt( ( ( 1 + pow(b, 2) ) * fabs( sin(channelData[sample]) ) ) / ( 1 + pow(b, 2) * pow(sin(channelData[sample]), 2) ) ) ;
+                    dist_sample_value = - sqrt( ( ( 1 + pow(b, 2) ) * fabs( sin(channelData[sample]) ) ) / ( 1 + pow(b, 2) * pow(sin(channelData[sample]), 2) ) ) ;
                 }
             }
             
-            channelData[sample] *= 0.3f ;
+            channelData[sample] = channelData[sample]*(1-dw) + dist_sample_value*dw;
+            
+//            channelData[sample] *= 0.3f ;
             
         }
         
