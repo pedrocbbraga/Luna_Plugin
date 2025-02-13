@@ -29,7 +29,7 @@ MoonSlider::~MoonSlider()
     
 }
 
-void MoonSlider::paint(juce::Graphics& g) {}
+//void MoonSlider::paint(juce::Graphics& g) {}
 
 void MoonSlider::resized()
 {
@@ -50,6 +50,8 @@ void MoonSlider::loadMoonTexture()
 
 void MoonSlider::newOpenGLContextCreated()
 {
+    //TODO: CREATE SHADERS FOLDER TO STORE VERTEXSHADER AND FRAGMENTSHADER STRINGS AS FILES. READ FROM FILES
+    
     // Compile and link shaders
     shaderProgram.reset(new juce::OpenGLShaderProgram(openGLContext));
 

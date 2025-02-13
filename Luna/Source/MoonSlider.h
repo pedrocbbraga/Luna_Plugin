@@ -20,7 +20,7 @@ public:
     MoonSlider();
     ~MoonSlider() override;
 
-    void paint(juce::Graphics& g) override;
+//    void paint(juce::Graphics& g) override;
     void resized() override;
 
 private:
