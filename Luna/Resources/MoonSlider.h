@@ -15,10 +15,11 @@
 //==============================================================================
 /**
 */
-class MoonSlider  : public juce::Slider
+
+class MoonSlider : public juce::Slider
 {
 public:
-    MoonSlider(juce:Slider);
+    MoonSlider();
     ~MoonSlider() override;
     
     void paint (juce::Graphics&) override;
@@ -26,4 +27,6 @@ public:
     
 private:
     
-}
+};
+
+

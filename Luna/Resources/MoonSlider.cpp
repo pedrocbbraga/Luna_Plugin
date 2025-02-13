@@ -9,3 +9,19 @@
 */
 
 #include "MoonSlider.h"
+
+MoonSlider::MoonSlider()
+{
+    setRange(0.0, 100.0, 0.1);
+    setSliderStyle(juce::Slider::LinearHorizontal);
+}
+
+MoonSlider::~MoonSlider()
+{
+    //Clean up
+}
+
+void MoonSlider::paint(<#juce::Graphics &#>)
+{
+    
+}
