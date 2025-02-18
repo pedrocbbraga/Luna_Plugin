@@ -29,20 +29,18 @@ void MoonSlider::paint(juce::Graphics& g)
 {
     g.drawImageWithin(moonImage, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
     
-//    g.setColour (juce::Colour {0xFF129183});
-//    g.drawEllipse(25, 25, 190, 190, 7);
+    g.setColour (juce::Colour {0xFF2A2A2A});
+    g.drawEllipse(25, 25, 190, 190, 7);
     
     // Ellipse for clipping mask
     ellipsePath.addEllipse(25, 21, 195, 195);
+    
     g.reduceClipRegion(ellipsePath);
     g.drawImageWithin(blackCircle, getValue() * 2, -16, getWidth() + 30, getHeight() + 30, juce::RectanglePlacement::stretchToFit);
 }
 
 void MoonSlider::resized()
 {
-    // This is called when the MoonSlider is resized.
-    // If you add any child components, this is where you should
-    // update their positions.
 }
 
 void MoonSlider::sliderValueChanged (juce::Slider* slider)
@@ -55,7 +53,6 @@ void MoonSlider::sliderValueChanged (juce::Slider* slider)
 
 void MoonSlider::loadMoonImage()
 {
-    // Load the moon image from the JUCE resources
     moonImage = juce::ImageCache::getFromMemory(BinaryData::whiteMoon_png, BinaryData::whiteMoon_pngSize);
     
     if (! moonImage.isNull())
@@ -71,7 +68,6 @@ void MoonSlider::loadMoonImage()
 
 void MoonSlider::loadBlackImage()
 {
-    // Load the moon image from the JUCE resources
     blackCircle = juce::ImageCache::getFromMemory(BinaryData::blackCircle_png, BinaryData::blackCircle_pngSize);
     
     if (! moonImage.isNull())
