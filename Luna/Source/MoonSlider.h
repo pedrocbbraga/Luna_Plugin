@@ -12,7 +12,7 @@
   ==============================================================================
 */
 
-class MoonSlider : public juce::Slider
+class MoonSlider : public juce::Slider, public juce::Slider::Listener
 {
 public:
     MoonSlider();
@@ -24,9 +24,18 @@ public:
 private:
 
     juce::Image moonImage;
-    void loadMoonImage();
-    
     juce::ImageComponent moonImageComponent;
+    
+    juce::Image blackCircle;
+    juce::ImageComponent blackCircleComponent;
+    
+    juce::Path ellipsePath;
+    
+    void loadMoonImage();
+    void loadBlackImage();
+    
+    void sliderValueChanged (juce::Slider* slider) override ;
+    
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MoonSlider)
 };

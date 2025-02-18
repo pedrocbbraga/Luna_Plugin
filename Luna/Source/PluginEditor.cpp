@@ -56,9 +56,9 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     addAndMakeVisible(mainComponent);
     mainComponent.setBounds(500, 400, 300, 225) ;
     
-//    moonSlider.setSize(400, 400);
+    // Moon slider jawn
     addAndMakeVisible(moonSlider);
-    moonSlider.setBounds(200, 200, 400, 400);
+    moonSlider.setBounds(275, 180, 250, 250);
 
 }
 
@@ -80,8 +80,8 @@ void LunaAudioProcessorEditor::paint (juce::Graphics& g)
 void LunaAudioProcessorEditor::resized()
 {
     // sets the position and size of the slider with arguments (x, y, width, height)
-    distSliderA.setBounds(100, 200, 200, 200);
-    distSliderB.setBounds(500, 200, 200, 200);
+    distSliderA.setBounds(30, 500, 90, 90);
+    distSliderB.setBounds(130, 500, 90, 90);
     dryWet.setBounds(300, 200, 200, 200);
     mImageComponent.setBoundsRelative(0.0f, 0.0f, 1.0f, 1.0f);
 }

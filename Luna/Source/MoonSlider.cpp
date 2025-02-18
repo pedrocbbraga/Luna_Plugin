@@ -12,11 +12,12 @@
 
 MoonSlider::MoonSlider()
 {
-    setRange(0.0, 100.0, 0.1);
+    setRange(12.0, 100.0, 1.0);
     setSliderStyle(juce::Slider::LinearHorizontal);
     setSize (800, 800);
     loadMoonImage();
-    addAndMakeVisible(moonImageComponent);
+    loadBlackImage();
+    addListener(this);
 }
 
 MoonSlider::~MoonSlider()
@@ -27,6 +28,14 @@ MoonSlider::~MoonSlider()
 void MoonSlider::paint(juce::Graphics& g)
 {
     g.drawImageWithin(moonImage, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
+    
+//    g.setColour (juce::Colour {0xFF129183});
+//    g.drawEllipse(25, 25, 190, 190, 7);
+    
+    // Ellipse for clipping mask
+    ellipsePath.addEllipse(25, 21, 195, 195);
+    g.reduceClipRegion(ellipsePath);
+    g.drawImageWithin(blackCircle, getValue() * 2, -16, getWidth() + 30, getHeight() + 30, juce::RectanglePlacement::stretchToFit);
 }
 
 void MoonSlider::resized()
@@ -36,14 +45,38 @@ void MoonSlider::resized()
     // update their positions.
 }
 
+void MoonSlider::sliderValueChanged (juce::Slider* slider)
+{
+    if (slider == this)
+    {
+        repaint();
+    }
+}
+
 void MoonSlider::loadMoonImage()
 {
     // Load the moon image from the JUCE resources
-    moonImage = juce::ImageCache::getFromMemory(BinaryData::bright_moon_png, BinaryData::bright_moon_pngSize);
+    moonImage = juce::ImageCache::getFromMemory(BinaryData::whiteMoon_png, BinaryData::whiteMoon_pngSize);
     
     if (! moonImage.isNull())
     {
         moonImageComponent.setImage (moonImage, juce::RectanglePlacement::stretchToFit);
+    }
+    else
+    {
+        DBG("ERROR: Moon image failed to load");
+        jassertfalse;
+    }
+}
+
+void MoonSlider::loadBlackImage()
+{
+    // Load the moon image from the JUCE resources
+    blackCircle = juce::ImageCache::getFromMemory(BinaryData::blackCircle_png, BinaryData::blackCircle_pngSize);
+    
+    if (! moonImage.isNull())
+    {
+        blackCircleComponent.setImage (moonImage, juce::RectanglePlacement::stretchToFit);
     }
     else
     {
