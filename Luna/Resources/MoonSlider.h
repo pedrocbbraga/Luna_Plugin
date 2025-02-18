@@ -1,3 +1,7 @@
+#pragma once
+
+#include <JuceHeader.h>
+
 /*
   ==============================================================================
 
@@ -6,14 +10,6 @@
     Author:  Pedro Cajaty B. Braga
 
   ==============================================================================
-*/
-
-#pragma once
-
-#include <JuceHeader.h>
-
-//==============================================================================
-/**
 */
 
 class MoonSlider : public juce::Slider
@@ -26,7 +22,12 @@ public:
     void resized() override;
     
 private:
+
+    void loadMoonTexture();
     
+    juce::ImageComponent moonImageComponent;
+    
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MoonSlider)
 };
 
 
