@@ -23,7 +23,8 @@ public:
     
 private:
 
-    void loadMoonTexture();
+    juce::Image moonImage;
+    void loadMoonImage();
     
     juce::ImageComponent moonImageComponent;
     

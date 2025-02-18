@@ -1,6 +1,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include "MainComponent.h"
+#include "MoonSlider.h"
 
 //==============================================================================
 LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
@@ -9,7 +10,7 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     //auto sadMickey = juce::ImageCache::getFromMemory(BinaryData::sad_mickey_png, BinaryData::sad_mickey_pngSize);
-    auto sadMickey = juce::ImageCache::getFromMemory(BinaryData::luna_ui_bg_800_600_1_png, BinaryData::luna_ui_bg_800_600_1_pngSize);
+    auto sadMickey = juce::ImageCache::getFromMemory(BinaryData::LunaPluginBG_png, BinaryData::LunaPluginBG_pngSize);
     
     if (! sadMickey.isNull())
         mImageComponent.setImage (sadMickey, juce::RectanglePlacement::stretchToFit);
@@ -41,19 +42,23 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     addAndMakeVisible (&distSliderB);
     
     /*------------ DRY WET SLIDER -----------*/
-    dryWet.setSliderStyle(juce::Slider::LinearHorizontal);
-    dryWet.setRange(0.0, 100.0, 1.0);
-    dryWet.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
-    dryWet.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
-    dryWet.setPopupDisplayEnabled (true, false, this);
-    dryWet.setTextValueSuffix(" Dry/Wet");
-    dryWet.addListener(this);
-    addAndMakeVisible (&dryWet);
+//    dryWet.setSliderStyle(juce::Slider::LinearHorizontal);
+//    dryWet.setRange(0.0, 100.0, 1.0);
+//    dryWet.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
+//    dryWet.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
+//    dryWet.setPopupDisplayEnabled (true, false, this);
+//    dryWet.setTextValueSuffix(" Dry/Wet");
+//    dryWet.addListener(this);
+//    addAndMakeVisible (&dryWet);
     
 
     // THIS TURNS THE AUDIO WAVE JAWN ON/OFF
     addAndMakeVisible(mainComponent);
     mainComponent.setBounds(500, 400, 300, 225) ;
+    
+//    moonSlider.setSize(400, 400);
+    addAndMakeVisible(moonSlider);
+    moonSlider.setBounds(200, 200, 400, 400);
 
 }
 
