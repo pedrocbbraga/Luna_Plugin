@@ -12,11 +12,15 @@
 
 MoonSlider::MoonSlider()
 {
-    setRange(12.0, 100.0, 1.0);
+    setRange(0.0,100, 0);
     setSliderStyle(juce::Slider::LinearHorizontal);
+    
     setSize (800, 800);
     loadMoonImage();
     loadBlackImage();
+    
+    setSliderSnapsToMousePosition(true);
+    
     addListener(this);
 }
 
@@ -27,6 +31,8 @@ MoonSlider::~MoonSlider()
 
 void MoonSlider::paint(juce::Graphics& g)
 {
+    Slider::paint (g);
+    
     g.drawImageWithin(moonImage, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
     
     g.setColour (juce::Colour {0xFF2A2A2A});
@@ -35,8 +41,13 @@ void MoonSlider::paint(juce::Graphics& g)
     // Ellipse for clipping mask
     ellipsePath.addEllipse(25, 21, 195, 195);
     
+    float sliderValue = getValue();
+    printf("slider value: %f\n", sliderValue);
+    printf("slider style: %u\n", getSliderStyle());
+    printf("interval: %lf\n", getInterval());
+    
     g.reduceClipRegion(ellipsePath);
-    g.drawImageWithin(blackCircle, getValue() * 2, -16, getWidth() + 30, getHeight() + 30, juce::RectanglePlacement::stretchToFit);
+    g.drawImageWithin(blackCircle, sliderValue * 2, -16, getWidth() + 30, getHeight() + 30, juce::RectanglePlacement::stretchToFit);
 }
 
 void MoonSlider::resized()
@@ -80,3 +91,5 @@ void MoonSlider::loadBlackImage()
         jassertfalse;
     }
 }
+
+
