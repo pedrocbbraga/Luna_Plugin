@@ -100,11 +100,17 @@ void MoonLNF::drawLinearSlider(juce::Graphics& g, int x, int y, int width, int h
             
             // LOAD BLACK CIRCLE IMAGE
             float xOffset = maxPoint.x;
+            DBG(height);
+            DBG(xOffset);
+            float range = log(240) - log (12);
+            float hOffset = 1 + (log(xOffset) - log(12)) / range;
+            float yOffset = -100 * (log(xOffset) - log(12)) / range;
+            DBG("hOffset:" << hOffset);
             ellipsePath.addEllipse(23, 21, 195, 195);
             g.reduceClipRegion(ellipsePath); //POTENTIAL ERRORS HERE, CHECK LATER
             if (!blackCircle.isNull())
             {
-                g.drawImageWithin(blackCircle, xOffset - 16, y - 16, width + 30, height + 30, juce::RectanglePlacement::stretchToFit);
+                g.drawImageWithin(blackCircle, xOffset - 16, (y - 16) + yOffset, width + 30, (height + 30) * hOffset, juce::RectanglePlacement::stretchToFit);
             }
             
             // Original slider fill path
