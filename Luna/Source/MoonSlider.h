@@ -1,6 +1,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "MoonSliderStyle.h"
 
 /*
   ==============================================================================
@@ -12,29 +13,33 @@
   ==============================================================================
 */
 
-class MoonSlider : public juce::Slider, public juce::Slider::Listener
+class MoonSlider : public juce::Component, public juce::Slider::Listener
 {
 public:
     MoonSlider();
     ~MoonSlider() override;
     
-    void paint (juce::Graphics&) override;
+//    void paint (juce::Graphics&) override;
     void resized() override;
+    void sliderValueChanged (juce::Slider* slider) override;
     
 private:
-
-    juce::Image moonImage;
-    juce::ImageComponent moonImageComponent;
+    MoonLNF moonLNF;
     
-    juce::Image blackCircle;
-    juce::ImageComponent blackCircleComponent;
+    juce::Slider slider;
     
-    juce::Path ellipsePath;
-    
-    void loadMoonImage();
-    void loadBlackImage();
-    
-    void sliderValueChanged (juce::Slider* slider) override ;
+//    juce::Image moonImage;
+//    juce::ImageComponent moonImageComponent;
+//    
+//    juce::Image blackCircle;
+//    juce::ImageComponent blackCircleComponent;
+//    
+//    juce::Path ellipsePath;
+//    
+//    void loadMoonImage();
+//    void loadBlackImage();
+//    
+//    void sliderValueChanged (juce::Slider* slider) override ;
     
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MoonSlider)

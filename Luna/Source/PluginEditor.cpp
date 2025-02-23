@@ -10,7 +10,7 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     //auto sadMickey = juce::ImageCache::getFromMemory(BinaryData::sad_mickey_png, BinaryData::sad_mickey_pngSize);
-    auto sadMickey = juce::ImageCache::getFromMemory(BinaryData::LunaPluginBG_png, BinaryData::LunaPluginBG_pngSize);
+    auto sadMickey = juce::ImageCache::getFromMemory(BinaryData::LunaPluginBG2_png, BinaryData::LunaPluginBG2_pngSize);
     
     if (! sadMickey.isNull())
         mImageComponent.setImage (sadMickey, juce::RectanglePlacement::stretchToFit);
@@ -69,7 +69,7 @@ LunaAudioProcessorEditor::~LunaAudioProcessorEditor()
 //==============================================================================
 void LunaAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    g.fillAll (juce::Colours::whitesmoke);
+    g.fillAll (juce::Colours::black);
 
     g.setColour (juce::Colours::black);
     g.setFont (juce::FontOptions (22.0f));

@@ -4,6 +4,10 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="Braga DSP"
               pluginFormats="buildAAX,buildAU,buildStandalone,buildVST3" pluginAAXCategory="8192">
   <MAINGROUP id="oC3VNQ" name="Luna">
+    <FILE id="VAGfL7" name="MoonSliderStyle.cpp" compile="1" resource="0"
+          file="Source/MoonSliderStyle.cpp"/>
+    <FILE id="SzmQ1E" name="MoonSliderStyle.h" compile="0" resource="0"
+          file="Source/MoonSliderStyle.h"/>
     <FILE id="QI5TzU" name="MoonSlider.cpp" compile="1" resource="0" file="Source/MoonSlider.cpp"/>
     <FILE id="B0jX28" name="MoonSlider.h" compile="0" resource="0" file="Source/MoonSlider.h"/>
     <FILE id="eaHhmE" name="LunaUIBackgroundLiam.png" compile="0" resource="1"
@@ -22,11 +26,15 @@
           file="Source/PluginProcessor.h"/>
     <GROUP id="{2495D1FE-40BB-08C1-F9D7-4C3B374CD821}" name="Resources">
       <FILE id="Yg7z5P" name="blackCircle.png" compile="0" resource="1" file="Resources/blackCircle.png"/>
+      <FILE id="DvfbjT" name="blackCircle2.png" compile="0" resource="1"
+            file="Resources/blackCircle2.png"/>
       <FILE id="uwwanF" name="bright_moon.png" compile="0" resource="1" file="Resources/bright_moon.png"/>
       <FILE id="GKocQy" name="luna_ui_bg_800_600_1.png" compile="0" resource="1"
             file="Resources/luna_ui_bg_800_600_1.png"/>
       <FILE id="wH7EPd" name="LunaPluginBG.png" compile="0" resource="1"
             file="Resources/LunaPluginBG.png"/>
+      <FILE id="slutAp" name="LunaPluginBG2.png" compile="0" resource="1"
+            file="Resources/LunaPluginBG2.png"/>
       <FILE id="O8vyNf" name="sad_mickey.png" compile="0" resource="1" file="Resources/sad_mickey.png"/>
       <FILE id="zpKswg" name="whiteMoon.png" compile="0" resource="1" file="Resources/whiteMoon.png"/>
     </GROUP>
