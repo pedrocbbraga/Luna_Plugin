@@ -4,6 +4,10 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="Braga DSP"
               pluginFormats="buildAAX,buildAU,buildStandalone,buildVST3" pluginAAXCategory="8192">
   <MAINGROUP id="oC3VNQ" name="Luna">
+    <FILE id="J7NSPB" name="LunaPluginBG4.png" compile="0" resource="1"
+          file="Resources/LunaPluginBG4.png"/>
+    <FILE id="EOnby1" name="LunaPluginBG3.png" compile="0" resource="1"
+          file="Resources/LunaPluginBG3.png"/>
     <FILE id="VAGfL7" name="MoonSliderStyle.cpp" compile="1" resource="0"
           file="Source/MoonSliderStyle.cpp"/>
     <FILE id="SzmQ1E" name="MoonSliderStyle.h" compile="0" resource="0"

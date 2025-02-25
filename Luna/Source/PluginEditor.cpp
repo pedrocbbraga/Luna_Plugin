@@ -10,7 +10,7 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     //auto sadMickey = juce::ImageCache::getFromMemory(BinaryData::sad_mickey_png, BinaryData::sad_mickey_pngSize);
-    auto sadMickey = juce::ImageCache::getFromMemory(BinaryData::LunaPluginBG2_png, BinaryData::LunaPluginBG2_pngSize);
+    auto sadMickey = juce::ImageCache::getFromMemory(BinaryData::LunaPluginBG4_png, BinaryData::LunaPluginBG4_pngSize);
     
     if (! sadMickey.isNull())
         mImageComponent.setImage (sadMickey, juce::RectanglePlacement::stretchToFit);
