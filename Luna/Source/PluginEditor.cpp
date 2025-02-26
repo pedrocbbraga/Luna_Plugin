@@ -93,5 +93,4 @@ void LunaAudioProcessorEditor::sliderValueChanged (juce::Slider* slider)
     audioProcessor.a = distSliderA.getValue();
     audioProcessor.b = distSliderB.getValue();
     audioProcessor.dw = moonSlider.slider.getValue()/100;
-    DBG(moonSlider.slider.getValue()/100);
 }
