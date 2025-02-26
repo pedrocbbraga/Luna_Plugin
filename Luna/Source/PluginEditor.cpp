@@ -10,7 +10,7 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     //auto sadMickey = juce::ImageCache::getFromMemory(BinaryData::sad_mickey_png, BinaryData::sad_mickey_pngSize);
-    auto sadMickey = juce::ImageCache::getFromMemory(BinaryData::LunaPluginBG4_png, BinaryData::LunaPluginBG4_pngSize);
+    auto sadMickey = juce::ImageCache::getFromMemory(BinaryData::LunaPluginBG5_png, BinaryData::LunaPluginBG5_pngSize);
     
     if (! sadMickey.isNull())
         mImageComponent.setImage (sadMickey, juce::RectanglePlacement::stretchToFit);
@@ -27,7 +27,7 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     distSliderA.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
     distSliderA.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
     distSliderA.setPopupDisplayEnabled (true, false, this);
-    distSliderA.setTextValueSuffix (" Distortion");
+    distSliderA.setTextValueSuffix (" A");
     distSliderA.addListener(this);
     addAndMakeVisible (&distSliderA);
     
@@ -37,7 +37,7 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     distSliderB.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
     distSliderB.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
     distSliderB.setPopupDisplayEnabled (true, false, this);
-    distSliderB.setTextValueSuffix (" Distortion");
+    distSliderB.setTextValueSuffix (" B");
     distSliderB.addListener(this);
     addAndMakeVisible (&distSliderB);
     
@@ -54,7 +54,8 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
 
     // THIS TURNS THE AUDIO WAVE JAWN ON/OFF
     addAndMakeVisible(mainComponent);
-    mainComponent.setBounds(500, 400, 300, 225) ;
+//    mainComponent.setBounds(500, 400, 300, 225) ;
+    mainComponent.setBounds(0, getHeight() / 2 - 100, getWidth() / 3 + 30, getHeight() / 3) ;
     
     // Moon slider jawn
     addAndMakeVisible(moonSlider);
