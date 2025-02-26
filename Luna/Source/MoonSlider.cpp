@@ -16,6 +16,7 @@ MoonSlider::MoonSlider()
     slider.setSliderStyle(juce::Slider::LinearHorizontal);
     slider.setRange(0.0, 100.0, 0.1);
     slider.setValue(50.0);
+//    DBG(slider.getValue());
     slider.setTextBoxStyle(juce::Slider::NoTextBox, true, 100, 25);
     
     slider.setLookAndFeel(&moonLNF);
@@ -39,7 +40,8 @@ void MoonSlider::sliderValueChanged (juce::Slider* slider)
     // Checks if slider that was changed is this class state's slider
     if (slider == &this->slider)
     {
-        DBG("repainted");
+//        DBG("repainted");
+//        DBG(slider->getValue());
         repaint();
     }
 }

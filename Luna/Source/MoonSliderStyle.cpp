@@ -26,7 +26,7 @@ void MoonLNF::drawLinearSlider(juce::Graphics& g, int x, int y, int width, int h
     /* --------------- BOILER PLATE SLIDER IMPLEMENTATION ------------------ */
     if (slider.isBar())
         {
-            DBG("This jawn a bar fr");
+//            DBG("This jawn a bar fr");
             g.setColour(slider.findColour(juce::Slider::trackColourId));
             g.fillRect(slider.isHorizontal() ? juce::Rectangle<float>(static_cast<float>(x), static_cast<float>(y) + 0.5f, sliderPos - static_cast<float>(x), static_cast<float>(height) - 1.0f)
                                              : juce::Rectangle<float>(static_cast<float>(x) + 0.5f, sliderPos, static_cast<float>(width) - 1.0f, static_cast<float>(y) + (static_cast<float>(height) - sliderPos)));
@@ -35,7 +35,7 @@ void MoonLNF::drawLinearSlider(juce::Graphics& g, int x, int y, int width, int h
         }
         else
         {
-            DBG("This jawn NOT a bar fr");
+//            DBG("This jawn NOT a bar fr");
             auto isTwoVal = (style == juce::Slider::SliderStyle::TwoValueVertical || style == juce::Slider::SliderStyle::TwoValueHorizontal);
             auto isThreeVal = (style == juce::Slider::SliderStyle::ThreeValueVertical || style == juce::Slider::SliderStyle::ThreeValueHorizontal);
 
@@ -100,12 +100,12 @@ void MoonLNF::drawLinearSlider(juce::Graphics& g, int x, int y, int width, int h
             
             // LOAD BLACK CIRCLE IMAGE
             float xOffset = maxPoint.x;
-            DBG(height);
-            DBG(xOffset);
+//            DBG(height);
+//            DBG(xOffset);
             float range = log(240) - log (12);
             float hOffset = 1 + (log(xOffset) - log(12)) / range;
             float yOffset = -100 * (log(xOffset) - log(12)) / range;
-            DBG("hOffset:" << hOffset);
+//            DBG("hOffset:" << hOffset);
             ellipsePath.addEllipse(23, 21, 195, 195);
             g.reduceClipRegion(ellipsePath); //POTENTIAL ERRORS HERE, CHECK LATER
             if (!blackCircle.isNull())

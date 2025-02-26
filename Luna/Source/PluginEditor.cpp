@@ -60,6 +60,7 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     // Moon slider jawn
     addAndMakeVisible(moonSlider);
     moonSlider.setBounds(275, 180, 250, 250);
+    moonSlider.slider.addListener(this);
 
 }
 
@@ -92,5 +93,5 @@ void LunaAudioProcessorEditor::sliderValueChanged (juce::Slider* slider)
     audioProcessor.a = distSliderA.getValue();
     audioProcessor.b = distSliderB.getValue();
     audioProcessor.dw = moonSlider.slider.getValue()/100;
-    
+    DBG(moonSlider.slider.getValue()/100);
 }
