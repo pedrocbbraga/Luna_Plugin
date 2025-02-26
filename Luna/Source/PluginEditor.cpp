@@ -91,6 +91,6 @@ void LunaAudioProcessorEditor::sliderValueChanged (juce::Slider* slider)
 {
     audioProcessor.a = distSliderA.getValue();
     audioProcessor.b = distSliderB.getValue();
-    audioProcessor.dw = dryWet.getValue()/100;
+    audioProcessor.dw = moonSlider.slider.getValue()/100;
     
 }

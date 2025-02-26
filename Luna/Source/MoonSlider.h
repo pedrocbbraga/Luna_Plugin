@@ -18,6 +18,8 @@ class MoonSlider : public juce::Component, public juce::Slider::Listener
 public:
     MoonSlider();
     ~MoonSlider() override;
+    juce::Slider slider;
+
     
 //    void paint (juce::Graphics&) override;
     void resized() override;
@@ -26,7 +28,6 @@ public:
 private:
     MoonLNF moonLNF;
     
-    juce::Slider slider;
     
 //    juce::Image moonImage;
 //    juce::ImageComponent moonImageComponent;
