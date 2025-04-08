@@ -4,6 +4,8 @@
 #include "PluginProcessor.h"
 #include "MainComponent.h"
 #include "MoonSlider.h"
+#include "DistSliderA.h"
+#include "DistSliderB.h"
 
 //==============================================================================
 /**
@@ -35,6 +37,9 @@ private:
     juce::ImageComponent mImageComponent;
     
     MoonSlider moonSlider;
+    
+    DistSliderA TESTdistSliderA;
+    DistSliderB TESTdistSliderB;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LunaAudioProcessorEditor)
 };

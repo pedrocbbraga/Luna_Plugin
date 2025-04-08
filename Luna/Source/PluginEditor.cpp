@@ -22,14 +22,14 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     setSize (800, 600);
     
     /* ----------- DIST SLIDER A ----------- */
-    distSliderA.setSliderStyle (juce::Slider::RotaryHorizontalDrag);
-    distSliderA.setRange (0.0, 100.0, 1.0);
-    distSliderA.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
-    distSliderA.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
-    distSliderA.setPopupDisplayEnabled (true, false, this);
-    distSliderA.setTextValueSuffix (" A");
-    distSliderA.addListener(this);
-    addAndMakeVisible (&distSliderA);
+//    distSliderA.setSliderStyle (juce::Slider::RotaryHorizontalDrag);
+//    distSliderA.setRange (0.0, 100.0, 1.0);
+//    distSliderA.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
+//    distSliderA.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
+//    distSliderA.setPopupDisplayEnabled (true, false, this);
+//    distSliderA.setTextValueSuffix (" A");
+//    distSliderA.addListener(this);
+//    addAndMakeVisible (&distSliderA);
     
     /* ----------- DIST SLIDER B ----------- */
     distSliderB.setSliderStyle (juce::Slider::RotaryHorizontalDrag);
@@ -61,6 +61,14 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     addAndMakeVisible(moonSlider);
     moonSlider.setBounds(275, 180, 250, 250);
     moonSlider.slider.addListener(this);
+    
+    // TEST DIST SLIDER A
+    addAndMakeVisible(TESTdistSliderA);
+    TESTdistSliderA.setBounds(275, 400, 150, 250);
+    
+    // TEST DIST SLIDER B
+    addAndMakeVisible(TESTdistSliderB);
+    TESTdistSliderB.setBounds(375, 400, 150, 250);
 
 }
 
@@ -90,7 +98,9 @@ void LunaAudioProcessorEditor::resized()
 
 void LunaAudioProcessorEditor::sliderValueChanged (juce::Slider* slider)
 {
-    audioProcessor.a = distSliderA.getValue();
+    audioProcessor.a = TESTdistSliderA.slider.getValue();
+//    DBG(TESTdistSliderA.slider.getValue());
     audioProcessor.b = distSliderB.getValue();
     audioProcessor.dw = moonSlider.slider.getValue()/100;
+//    DBG(moonSlider.slider.getValue());
 }

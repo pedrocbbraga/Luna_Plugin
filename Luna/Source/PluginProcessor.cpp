@@ -202,7 +202,7 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
             
             channelData[sample] = channelData[sample]*(1-dw) + dist_sample_value*dw;
             
-//            channelData[sample] *= 0.3f ;
+            channelData[sample] *= 0.3f ;
             
         }
         
