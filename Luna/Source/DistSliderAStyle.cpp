@@ -68,7 +68,7 @@ void DistLNF_A::drawLinearSlider(juce::Graphics& g, int x, int y, int width, int
 //            g.fillRect(float(width / 2), float(height / 3), float(width / 3), float(height / 3));
             
             // CHANGE TRIANGLE SIZE HERE
-            float triangleX = 50.0f;
+            float triangleX = 65.0f;
             float triangleY = 50.0f;
             float triangleWidth = 75.0f;
             float triangleHeight = 75.0f;

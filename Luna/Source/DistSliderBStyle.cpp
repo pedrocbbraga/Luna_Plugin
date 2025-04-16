@@ -68,17 +68,17 @@ void DistLNF_B::drawLinearSlider(juce::Graphics& g, int x, int y, int width, int
 //            g.fillRect(float(width / 2), float(height / 3), float(width / 3), float(height / 3));
             
             // CHANGE TRIANGLE SIZE HERE
-            float triangleX = 50.0f;
-            float triangleY = 50.0f;
+            float triangleX = 20.0f;
+//            float triangleY = 0.0f;
             float triangleWidth = 75.0f;
-            float triangleHeight = 75.0f;
+            float triangleHeight = 50.0f;
 
             // Core variables
             float topX = triangleX + triangleWidth / 2.0f;
-            float topY = triangleY;
+            float topY = triangleHeight * 3 - 25.0f;
             float baseLeftX = triangleX;
             float baseRightX = triangleX + triangleWidth;
-            float baseY = triangleY + triangleHeight;
+            float baseY = triangleHeight;
 
             // BG triangle
             juce::Path triangle;
