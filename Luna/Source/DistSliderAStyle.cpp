@@ -137,7 +137,7 @@ void DistLNF_A::drawLinearSlider(juce::Graphics& g, int x, int y, int width, int
             g.setColour(slider.findColour(juce::Slider::trackColourId));
             
             float yOffset = maxPoint.x;
-            DBG(yOffset);
+//            DBG(yOffset);
 //            g.setColour(juce::Colours::whitesmoke);
 //            g.reduceClipRegion(float(width / 2), float(height / 3), float(width / 3), float(height / 3));
 //            g.fillRect(float(width / 2), (-yOffset / 2.7) + 87, float(width / 3), float(height / 3));
