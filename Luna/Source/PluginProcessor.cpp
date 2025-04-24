@@ -105,6 +105,7 @@ void LunaAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     
     auto delayBufferSize = 1024 ;
     delayBuffer.setSize(getTotalNumOutputChannels(), (int)delayBufferSize) ;
+    delayBufferPost.setSize(getTotalNumOutputChannels(), (int)delayBufferSize) ;
 }
 
 void LunaAudioProcessor::releaseResources()
@@ -158,6 +159,8 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
         
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
+        
+        /* ---------------- PRE-PROCESSING GRAPHICS BUFFER  ---------------- */
         auto* channelData = buffer.getWritePointer (channel);
         
         // Checks if main buffer can copy to delay buffer without needing to wrap
@@ -181,12 +184,15 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
             delayBuffer.copyFromWithRamp(channel, 0, channelData + numSamplesToEnd, numSamplesAtStart, 0.1f, 0.1f) ;
             
         }
+        /* ----------------------------------------------------------------- */
         
+        
+        
+        
+        
+        /* ---------------- DISTORTION PROCESSING  ---------------- */
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
-        
-            //channelData[sample] = (2.f / juce::MathConstants<float>::pi) * atan(distOnSlider * channelData[sample]) ;
-            
             if (channelData[sample] != 0)
             {
                 //channelData[sample] = std::tanh(3.0f * channelData[sample]) / std::tanh(channelData[sample]) ;
@@ -199,12 +205,19 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
                     dist_sample_value = - sqrt( ( ( 1 + pow(b, 2) ) * fabs( sin(channelData[sample]) ) ) / ( 1 + pow(b, 2) * pow(sin(channelData[sample]), 2) ) ) ;
                 }
             }
-            
             channelData[sample] = channelData[sample]*(1-dw) + dist_sample_value*dw;
-            
             channelData[sample] *= 0.3f ;
-            
         }
+        /* --------------------------------------------------------- */
+        
+        
+        /* ---------------- POST-PROCESSING GRAPHICS BUFFER  ---------------- */
+        
+        // TODO
+        
+        /* ------------------------------------------------------------------ */
+        
+        
         
     }
     

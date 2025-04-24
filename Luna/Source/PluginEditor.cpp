@@ -54,13 +54,14 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
 
     // THIS TURNS THE AUDIO WAVE JAWN ON/OFF
     addAndMakeVisible(mainComponent);
-//    mainComponent.setBounds(500, 400, 300, 225) ;
     mainComponent.setBounds(0, getHeight() / 2 - 100, getWidth() / 3 + 30, getHeight() / 3) ;
+//    mainComponent.toBack();
     
     // Moon slider jawn
     addAndMakeVisible(moonSlider);
     moonSlider.setBounds(275, 180, 250, 250);
     moonSlider.slider.addListener(this);
+//    moonSlider.setAlwaysOnTop(true);
     
     // TEST DIST SLIDER A
     addAndMakeVisible(TESTdistSliderA);

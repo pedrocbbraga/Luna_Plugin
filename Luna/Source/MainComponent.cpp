@@ -48,7 +48,8 @@ void MainComponent::paint (juce::Graphics& g)
     
     
     // Draws the sine wave segments
-    g.setColour (juce::Colour {0xFFf7f6f0});
+//    g.setColour (juce::Colour {0xFFf7f6f0});
+    g.setColour(juce::Colour (0xffef233c));
     
 //    int partIndexOffset = -(PARTS / 2);
     
