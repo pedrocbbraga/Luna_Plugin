@@ -55,11 +55,14 @@ public:
     
     
     const juce::AudioBuffer<float>& getDelayBuffer() const { return delayBuffer; }
+    const juce::AudioBuffer<float>& getDelayBufferWet() const { return delayBufferWet; }
     
 private:
     
     juce::AudioBuffer<float> delayBuffer ;
+    juce::AudioBuffer<float> delayBufferWet ;
     int writePosition { 0 } ;
+    int writePositionWet { 0 } ;
     
     //** PARAMETERS =========================================================*/
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout() ;

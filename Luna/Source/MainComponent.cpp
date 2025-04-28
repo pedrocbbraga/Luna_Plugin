@@ -19,15 +19,20 @@ MainComponent::~MainComponent()
 {
 }
 
+
 //==============================================================================
 void MainComponent::update()
 {
-    const auto& delayBuffer = processor.getDelayBuffer();
+    
+    const auto &drawBuffer = processor.getDelayBuffer();
 
-    if (delayBuffer.getNumChannels() > 0)
+    if (isWet) {
+        const auto &drawBuffer = processor.getDelayBufferWet();
+    }
+    if (drawBuffer.getNumChannels() > 0)
     {
-        auto* readPointer = delayBuffer.getReadPointer(0); // Assuming mono visualization
-        int bufferSize = delayBuffer.getNumSamples();
+        auto* readPointer = drawBuffer.getReadPointer(0); // Assuming mono visualization
+        int bufferSize = drawBuffer.getNumSamples();
 
         // Map audio buffer data to `partsHeight`
         for (int i = 0; i < bufferSize; ++i)

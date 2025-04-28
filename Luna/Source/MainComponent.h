@@ -23,6 +23,7 @@ public:
     void paint (juce::Graphics& g) override;
     void resized() override;
     void addNewSample (float newSample, int sampleAmt);
+    void setBufferType(bool val) { isWet = val; }
     
 private:
     //==============================================================================
@@ -38,6 +39,7 @@ private:
     static constexpr float INCREMENT { 0.01f }; //Original: 2.0f
     static constexpr float PART_OFFSET { 0.01f };
     bool isForward { true };
+    bool isWet;
 
 
     float getPartDistanceOffset (int partIndexOffset)

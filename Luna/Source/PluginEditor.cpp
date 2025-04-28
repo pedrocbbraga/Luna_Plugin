@@ -5,7 +5,7 @@
 
 //==============================================================================
 LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p), mainComponent(p)
+    : AudioProcessorEditor (&p), audioProcessor (p), mainComponent(p), mainComponentWet(p)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -54,12 +54,17 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
 
     // THIS TURNS THE AUDIO WAVE JAWN ON/OFF
     addAndMakeVisible(mainComponent);
+    mainComponent.setBufferType(false);
+    addAndMakeVisible(mainComponentWet);
+    mainComponentWet.setBufferType(true);
 //    mainComponent.setBounds(500, 400, 300, 225) ;
     mainComponent.setBounds(0, getHeight() / 2 - 100, getWidth() / 3 + 30, getHeight() / 3) ;
+
     
     // Moon slider jawn
     addAndMakeVisible(moonSlider);
     moonSlider.setBounds(275, 180, 250, 250);
+    mainComponentWet.setBounds(moonSlider.getX() + moonSlider.getWidth() - 32, getHeight() / 2 - 100, getWidth() / 3 + 30, getHeight() / 3) ;
     moonSlider.slider.addListener(this);
 
 }

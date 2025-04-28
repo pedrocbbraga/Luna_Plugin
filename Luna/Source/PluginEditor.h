@@ -31,6 +31,7 @@ private:
     juce::Slider dryWet ;
     
     MainComponent mainComponent;
+    MainComponent mainComponentWet;
 
     juce::ImageComponent mImageComponent;
     
