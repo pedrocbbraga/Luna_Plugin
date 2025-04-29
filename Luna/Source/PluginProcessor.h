@@ -55,6 +55,7 @@ public:
     
     
     const juce::AudioBuffer<float>& getDelayBuffer() const { return delayBuffer; }
+    const juce::AudioBuffer<float>& getDelayBufferPost() const { return delayBufferPost; }
     
 private:
     

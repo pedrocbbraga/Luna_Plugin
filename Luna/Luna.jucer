@@ -4,6 +4,10 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="Braga DSP"
               pluginFormats="buildAAX,buildAU,buildStandalone,buildVST3" pluginAAXCategory="8192">
   <MAINGROUP id="oC3VNQ" name="Luna">
+    <FILE id="Bd0lMV" name="GraphicsVisualizer.cpp" compile="1" resource="0"
+          file="Source/GraphicsVisualizer.cpp"/>
+    <FILE id="v51xNo" name="GraphicsVisualizer.h" compile="0" resource="0"
+          file="Source/GraphicsVisualizer.h"/>
     <FILE id="nphYZA" name="DistSliderB.cpp" compile="1" resource="0" file="Source/DistSliderB.cpp"/>
     <FILE id="iV3ebH" name="DistSliderB.h" compile="0" resource="0" file="Source/DistSliderB.h"/>
     <FILE id="LtWJ0t" name="DistSliderBStyle.cpp" compile="1" resource="0"

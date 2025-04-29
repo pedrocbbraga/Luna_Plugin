@@ -83,7 +83,7 @@ void DistLNF_B::drawLinearSlider(juce::Graphics& g, int x, int y, int width, int
             // BG triangle
             juce::Path triangle;
             triangle.addTriangle(topX, topY, baseLeftX, baseY, baseRightX, baseY);
-            g.setColour(juce::Colour (0xffef233c));
+            g.setColour(juce::Colour (0xff6C158C));
             g.fillPath(triangle);
 
             // Inner fill variables

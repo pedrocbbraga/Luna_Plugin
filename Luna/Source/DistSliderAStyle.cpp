@@ -58,15 +58,6 @@ void DistLNF_A::drawLinearSlider(juce::Graphics& g, int x, int y, int width, int
             slider.setColour(juce::Slider::backgroundColourId, juce::Colours::purple);
             g.setColour(slider.findColour(juce::Slider::backgroundColourId));
             
-            // LOAD MOON IMAGE
-//            if (!moonImage.isNull())
-//            {
-//                g.drawImageWithin(moonImage, 0, 0, width * 1.1, height, juce::RectanglePlacement::stretchToFit);
-//            }
-            
-//            g.setColour(juce::Colours::purple);
-//            g.fillRect(float(width / 2), float(height / 3), float(width / 3), float(height / 3));
-            
             // CHANGE TRIANGLE SIZE HERE
             float triangleX = 65.0f;
             float triangleY = 50.0f;
@@ -83,7 +74,7 @@ void DistLNF_A::drawLinearSlider(juce::Graphics& g, int x, int y, int width, int
             // BG triangle
             juce::Path triangle;
             triangle.addTriangle(topX, topY, baseLeftX, baseY, baseRightX, baseY);
-            g.setColour(juce::Colour (0xffef233c));
+            g.setColour(juce::Colour (0xff6C158C));
             g.fillPath(triangle);
 
             // Inner fill variables

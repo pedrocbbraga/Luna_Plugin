@@ -212,9 +212,29 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
         
         
         /* ---------------- POST-PROCESSING GRAPHICS BUFFER  ---------------- */
+        auto* channelDataWet = buffer.getWritePointer (channel);
+        int delayBufferPostSize = delayBufferPost.getNumSamples() ;
         
-        // TODO
-        
+        // Checks if main buffer can copy to delay buffer without needing to wrap
+        if (delayBufferPostSize > bufferSize + writePositionPost)
+        {
+            // Copy main buffer contents to delay buffer
+            delayBufferPost.copyFromWithRamp(channel, writePositionPost, channelDataWet, bufferSize, 0.1f, 0.1f) ;
+        }
+        else
+        {
+            // Determine how much space is left at the end of the delay buffer
+            auto numSamplesToEnd = delayBufferPostSize - writePositionPost ;
+            
+            // Copy that number of contents to the end
+            delayBufferPost.copyFromWithRamp(channel, writePositionPost, channelDataWet, numSamplesToEnd, 0.1f, 0.1f) ;
+            
+            // Determine how much contents is remaining to copy
+            auto numSamplesAtStart = bufferSize - numSamplesToEnd ;
+            
+            // Copy remaining amount to beginning of delay buffer
+            delayBufferPost.copyFromWithRamp(channel, 0, channelDataWet + numSamplesToEnd, numSamplesAtStart, 0.1f, 0.1f) ;
+        }
         /* ------------------------------------------------------------------ */
         
         
@@ -229,6 +249,9 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
     
     writePosition += bufferSize ;
     writePosition %= delayBufferSize ;
+    
+    writePositionPost += bufferSize;
+    writePositionPost %= delayBufferPost.getNumSamples();
     
 }
 

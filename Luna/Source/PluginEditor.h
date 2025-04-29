@@ -6,6 +6,7 @@
 #include "MoonSlider.h"
 #include "DistSliderA.h"
 #include "DistSliderB.h"
+#include "GraphicsVisualizer.h"
 
 //==============================================================================
 /**
@@ -33,6 +34,8 @@ private:
     juce::Slider dryWet ;
     
     MainComponent mainComponent;
+    std::unique_ptr<GraphicsVisualizer> dryGraphics;
+    std::unique_ptr<GraphicsVisualizer> wetGraphics;
 
     juce::ImageComponent mImageComponent;
     

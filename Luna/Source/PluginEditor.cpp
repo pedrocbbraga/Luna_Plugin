@@ -53,9 +53,30 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
     
 
     // THIS TURNS THE AUDIO WAVE JAWN ON/OFF
-    addAndMakeVisible(mainComponent);
-    mainComponent.setBounds(0, getHeight() / 2 - 100, getWidth() / 3 + 30, getHeight() / 3) ;
+//    addAndMakeVisible(mainComponent);
+//    mainComponent.setBounds(0, getHeight() / 2 - 100, getWidth() / 3 + 30, getHeight() / 3) ;
 //    mainComponent.toBack();
+    
+    // Lambda function format for later reference:
+    // [captures](parameter list) -> return type
+    dryGraphics = std::make_unique<GraphicsVisualizer>(
+                        audioProcessor,
+                        [this]() -> const juce::AudioBuffer<float>& { return audioProcessor.getDelayBuffer(); },
+                        juce::Colour (0xff6C158C)
+                                                       );
+    dryGraphics->setBounds(0, getHeight() / 2 - 100, getWidth() / 3 + 30, getHeight() / 3) ;
+    addAndMakeVisible(*dryGraphics);
+    
+    wetGraphics = std::make_unique<GraphicsVisualizer>(
+                        audioProcessor,
+                        [this]() -> const juce::AudioBuffer<float>& { return audioProcessor.getDelayBufferPost(); },
+                        juce::Colour (0xff6C158C)
+                                                       );
+    wetGraphics->setBounds(490, getHeight() / 2 - 100, getWidth() / 3 + 50, getHeight() / 3) ;
+    addAndMakeVisible(*wetGraphics);
+    
+    DBG("Width: " << getWidth());
+    DBG("Height: " << getHeight());
     
     // Moon slider jawn
     addAndMakeVisible(moonSlider);
