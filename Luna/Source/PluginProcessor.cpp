@@ -103,9 +103,21 @@ void LunaAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
     
-    auto delayBufferSize = 1024 ;
-    delayBuffer.setSize(getTotalNumOutputChannels(), (int)delayBufferSize) ;
-    delayBufferPost.setSize(getTotalNumOutputChannels(), (int)delayBufferSize) ;
+//    auto delayBufferSize = 1024 ;
+//    delayBuffer.setSize(getTotalNumOutputChannels(), (int)delayBufferSize) ;
+//    delayBufferPost.setSize(getTotalNumOutputChannels(), (int)delayBufferSize) ;
+    
+    const int numChannels = getTotalNumOutputChannels();
+    const int delayBufferSize = samplesPerBlock * 4;
+
+    delayBuffer.setSize(numChannels, delayBufferSize);
+    delayBuffer.clear();
+
+    delayBufferPost.setSize(numChannels, delayBufferSize);
+    delayBufferPost.clear();
+
+    writePosition = 0;
+    writePositionPost = 0;
 }
 
 void LunaAudioProcessor::releaseResources()
