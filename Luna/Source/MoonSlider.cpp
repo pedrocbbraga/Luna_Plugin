@@ -15,7 +15,7 @@ MoonSlider::MoonSlider()
 {
     slider.setSliderStyle(juce::Slider::LinearHorizontal);
     slider.setRange(0.0, 100.0, 0.1);
-    slider.setValue(50.0);
+//    slider.setValue(50.0);
 //    DBG(slider.getValue());
     slider.setTextBoxStyle(juce::Slider::NoTextBox, true, 100, 25);
     
