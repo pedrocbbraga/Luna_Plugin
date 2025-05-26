@@ -18,86 +18,57 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
         jassert (! sadMickey.isNull());
     
     addAndMakeVisible(mImageComponent);
-    
     setSize (800, 600);
     
-    /* ----------- DIST SLIDER A ----------- */
-//    distSliderA.setSliderStyle (juce::Slider::RotaryHorizontalDrag);
-//    distSliderA.setRange (0.0, 100.0, 1.0);
-//    distSliderA.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
-//    distSliderA.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
-//    distSliderA.setPopupDisplayEnabled (true, false, this);
-//    distSliderA.setTextValueSuffix (" A");
-//    distSliderA.addListener(this);
-//    addAndMakeVisible (&distSliderA);
     
-    /* ----------- DIST SLIDER B ----------- */
-//    distSliderB.setSliderStyle (juce::Slider::RotaryHorizontalDrag);
-//    distSliderB.setRange (0.0, 100.0, 1.0);
-//    distSliderB.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
-//    distSliderB.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
-//    distSliderB.setPopupDisplayEnabled (true, false, this);
-//    distSliderB.setTextValueSuffix (" B");
-//    distSliderB.addListener(this);
-//    addAndMakeVisible (&distSliderB);
-    
-    /*------------ DRY WET SLIDER -----------*/
-//    dryWet.setSliderStyle(juce::Slider::LinearHorizontal);
-//    dryWet.setRange(0.0, 100.0, 1.0);
-//    dryWet.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::whitesmoke);
-//    dryWet.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
-//    dryWet.setPopupDisplayEnabled (true, false, this);
-//    dryWet.setTextValueSuffix(" Dry/Wet");
-//    dryWet.addListener(this);
-//    addAndMakeVisible (&dryWet);
-    
-
-    // THIS TURNS THE AUDIO WAVE JAWN ON/OFF
-//    addAndMakeVisible(mainComponent);
-//    mainComponent.setBounds(0, getHeight() / 2 - 100, getWidth() / 3 + 30, getHeight() / 3) ;
-//    mainComponent.toBack();
-    
-    // Lambda function format for later reference:
-    // [captures](parameter list) -> return type
+    /* ----------------- GRAPHICS VISUALIZERS ----------------- */
+    // INPUT
     dryGraphics = std::make_unique<GraphicsVisualizer>(
                         audioProcessor,
                         [this]() -> const juce::AudioBuffer<float>& { return audioProcessor.getDelayBuffer(); },
-                        juce::Colour (0xff6C158C)
-                                                       );
+                        juce::Colour (0xff6C158C));
     dryGraphics->setBounds(0, getHeight() / 2 - 100, getWidth() / 3 + 30, getHeight() / 3) ;
     addAndMakeVisible(*dryGraphics);
     
+    // OUTPUT
     wetGraphics = std::make_unique<GraphicsVisualizer>(
                         audioProcessor,
                         [this]() -> const juce::AudioBuffer<float>& { return audioProcessor.getDelayBufferPost(); },
-                        juce::Colour (0xff6C158C)
-                                                       );
+                        juce::Colour (0xff6C158C));
     wetGraphics->setBounds(490, getHeight() / 2 - 100, getWidth() / 3 + 50, getHeight() / 3) ;
     addAndMakeVisible(*wetGraphics);
     
-    DBG("Width: " << getWidth());
-    DBG("Height: " << getHeight());
+//    DBG("Width: " << getWidth());
+//    DBG("Height: " << getHeight());
     
     // Moon slider jawn
     addAndMakeVisible(moonSlider);
     moonSlider.setBounds(275, 180, 250, 250);
-    moonSlider.slider.addListener(this);
-//    moonSlider.setAlwaysOnTop(true);
     
     // TEST DIST SLIDER A
     addAndMakeVisible(TESTdistSliderA);
     TESTdistSliderA.setBounds(275, 400, 150, 250);
-    TESTdistSliderA.slider.addListener(this);
     
     // TEST DIST SLIDER B
     addAndMakeVisible(TESTdistSliderB);
     TESTdistSliderB.setBounds(375, 400, 150, 250);
-    TESTdistSliderB.slider.addListener(this);
+    
+    moonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+        audioProcessor.treeState, "moonDryWet", moonSlider.slider);
+
+    distAAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+        audioProcessor.treeState, "distA", TESTdistSliderA.slider);
+
+    distBAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(
+        audioProcessor.treeState, "distB", TESTdistSliderB.slider);
 
 }
 
 LunaAudioProcessorEditor::~LunaAudioProcessorEditor()
 {
+    moonAttachment = nullptr;
+    distAAttachment = nullptr;
+    distBAttachment = nullptr;
 }
 
 //==============================================================================
@@ -120,11 +91,11 @@ void LunaAudioProcessorEditor::resized()
     mImageComponent.setBoundsRelative(0.0f, 0.0f, 1.0f, 1.0f);
 }
 
-void LunaAudioProcessorEditor::sliderValueChanged (juce::Slider* slider)
-{
-    audioProcessor.a = TESTdistSliderA.slider.getValue()/10;
-//    DBG(TESTdistSliderA.slider.getValue());
-    audioProcessor.b = TESTdistSliderB.slider.getValue()/10;
-    audioProcessor.dw = moonSlider.slider.getValue()/100;
-//    DBG(moonSlider.slider.getValue());
-}
+//void LunaAudioProcessorEditor::sliderValueChanged (juce::Slider* slider)
+//{
+////    audioProcessor.a = TESTdistSliderA.slider.getValue()/10;
+//////    DBG(TESTdistSliderA.slider.getValue());
+////    audioProcessor.b = TESTdistSliderB.slider.getValue()/10;
+////    audioProcessor.dw = moonSlider.slider.getValue()/100;
+//////    DBG(moonSlider.slider.getValue());
+//}

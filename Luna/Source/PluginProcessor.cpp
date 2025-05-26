@@ -24,15 +24,13 @@ LunaAudioProcessor::~LunaAudioProcessor()
 
 juce::AudioProcessorValueTreeState::ParameterLayout LunaAudioProcessor::createParameterLayout()
 {
-    std::vector <std::unique_ptr<juce::RangedAudioParameter>> params ;
-    
-    auto pGain = std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"gain", 1}, "Gain", -100.0, 12.0, 0.0) ;
-    params.push_back(std::move(pGain)) ;
-    
-    auto pDist = std::make_unique<juce::AudioParameterFloat>(juce::ParameterID {"dist", 1}, "Dist", 0.0, 100.0, 0.0) ;
-    params.push_back(std::move(pDist)) ;
-    
-    return { params.begin(), params.end() } ;
+    std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("moonDryWet", "Dry Wet", 0.0f, 100.0f, 50.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("distA", "Distortion A", 0.0f, 100.0f, 50.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("distB", "Distortion B", 0.0f, 100.0f, 50.0f));
+
+    return { params.begin(), params.end() };
 }
 
 //==============================================================================
@@ -166,8 +164,9 @@ void LunaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
     auto bufferSize = buffer.getNumSamples() ;
     auto delayBufferSize = delayBuffer.getNumSamples() ;
     
-    //float dbGain = *treeState.getRawParameterValue("gain") ;
-    //float rawGain = juce::Decibels::decibelsToGain(dbGain) ;
+    float a = treeState.getRawParameterValue("distA")->load() / 10.0f;
+    float b = treeState.getRawParameterValue("distB")->load() / 10.0f;
+    float dw = treeState.getRawParameterValue("moonDryWet")->load() / 100.0f;
         
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
@@ -286,12 +285,18 @@ void LunaAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+    auto state = treeState.copyState();
+    std::unique_ptr<juce::XmlElement> xml (state.createXml());
+    copyXmlToBinary(*xml, destData);
 }
 
 void LunaAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+    std::unique_ptr<juce::XmlElement> xmlState (getXmlFromBinary(data, sizeInBytes));
+    if (xmlState && xmlState->hasTagName(treeState.state.getType()))
+        treeState.replaceState(juce::ValueTree::fromXml(*xmlState));
 }
 
 //==============================================================================

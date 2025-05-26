@@ -11,8 +11,7 @@
 //==============================================================================
 /**
 */
-class LunaAudioProcessorEditor  : public juce::AudioProcessorEditor,
-                                  private juce::Slider::Listener
+class LunaAudioProcessorEditor  : public juce::AudioProcessorEditor
 {
 public:
     LunaAudioProcessorEditor (LunaAudioProcessor&);
@@ -23,7 +22,7 @@ public:
     void resized() override;
 
 private:
-    void sliderValueChanged (juce::Slider* slider) override ;
+//    void sliderValueChanged (juce::Slider* slider) override ;
     
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
@@ -36,11 +35,13 @@ private:
     MainComponent mainComponent;
     std::unique_ptr<GraphicsVisualizer> dryGraphics;
     std::unique_ptr<GraphicsVisualizer> wetGraphics;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> moonAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> distAAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> distBAttachment;
 
     juce::ImageComponent mImageComponent;
     
     MoonSlider moonSlider;
-    
     DistSliderA TESTdistSliderA;
     DistSliderB TESTdistSliderB;
     
