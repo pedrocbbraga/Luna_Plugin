@@ -53,7 +53,6 @@
             file="Resources/LunaPluginBG.png"/>
       <FILE id="slutAp" name="LunaPluginBG2.png" compile="0" resource="1"
             file="Resources/LunaPluginBG2.png"/>
-      <FILE id="O8vyNf" name="sad_mickey.png" compile="0" resource="1" file="Resources/sad_mickey.png"/>
       <FILE id="zpKswg" name="whiteMoon.png" compile="0" resource="1" file="Resources/whiteMoon.png"/>
     </GROUP>
   </MAINGROUP>

@@ -9,13 +9,12 @@ LunaAudioProcessorEditor::LunaAudioProcessorEditor (LunaAudioProcessor& p)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    //auto sadMickey = juce::ImageCache::getFromMemory(BinaryData::sad_mickey_png, BinaryData::sad_mickey_pngSize);
-    auto sadMickey = juce::ImageCache::getFromMemory(BinaryData::LunaPluginBG5_png, BinaryData::LunaPluginBG5_pngSize);
+    auto background = juce::ImageCache::getFromMemory(BinaryData::LunaPluginBG5_png, BinaryData::LunaPluginBG5_pngSize);
     
-    if (! sadMickey.isNull())
-        mImageComponent.setImage (sadMickey, juce::RectanglePlacement::stretchToFit);
+    if (! background.isNull())
+        mImageComponent.setImage (background, juce::RectanglePlacement::stretchToFit);
     else
-        jassert (! sadMickey.isNull());
+        jassert (! background.isNull());
     
     addAndMakeVisible(mImageComponent);
     
@@ -86,7 +85,7 @@ void LunaAudioProcessorEditor::paint (juce::Graphics& g)
 
     g.setColour (juce::Colours::black);
     g.setFont (juce::FontOptions (22.0f));
-    g.drawFittedText ("Luna Plugin on fucking god boul", getLocalBounds(), juce::Justification::bottomLeft, 1);
+    g.drawFittedText ("Luna", getLocalBounds(), juce::Justification::bottomLeft, 1);
     g.drawFittedText ("Diode", 22, 5, getWidth(), 30, juce::Justification::topLeft, 1);
 }
 
