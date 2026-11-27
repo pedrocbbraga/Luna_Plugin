@@ -93,9 +93,11 @@ Luna/Resources/               UI artwork
   standard remedy.
 - **Output is scaled by a fixed `0.3`** after shaping to avoid clipping at high drive, rather
   than normalizing against the transfer function's own gain.
-- **The waveform visualizer was designed but never built.** The architecture called for a
-  `GraphicsVisualizer` base class with separate input and output views. What exists is the
-  circular delay buffer in `processBlock` that would have fed it.
+- **The visualizer redraws inefficiently.** `MainComponent::update` calls `addNewSample`
+  once per sample in the delay buffer, and each call does a `std::rotate` across the full
+  1024-element history, so a 512-sample buffer moves over half a million elements per frame
+  at 60 fps. A circular write index would make it O(1) per sample. It holds up on current
+  hardware but scales badly with buffer size.
 
 ## License
 
